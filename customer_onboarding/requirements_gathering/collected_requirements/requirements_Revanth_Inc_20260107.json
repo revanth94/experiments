@@ -7,6 +7,10 @@
     "migratory bird impacts"
   ],
   "purpose": "Environmental due diligence for wind farm development project",
+  "report_types": [
+    "technical report",
+    "GIS maps package"
+  ],
   "additional_info": "Analyze historical patterns over the past 5 years to establish comprehensive baseline data for seasonal migration patterns and trends",
   "status": "pending_analysis"
 }

@@ -12,6 +12,12 @@
     "water quality threats"
   ],
   "purpose": "Disaster planning and preparedness for wildfire risk assessment",
+  "report_types": [
+    "executive summary",
+    "technical report",
+    "GIS maps package",
+    "risk assessment report"
+  ],
   "additional_info": "Analyze historical wildfire patterns and trends over the past 10 years",
   "status": "pending_analysis"
 }

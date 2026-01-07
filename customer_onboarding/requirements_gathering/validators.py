@@ -97,6 +97,40 @@ def validate_purpose(purpose: str) -> Tuple[bool, str]:
     return True, ""
 
 
+def validate_report_types(report_types: List[str]) -> Tuple[bool, str]:
+    """
+    Validate the report types list
+    
+    Args:
+        report_types: List of report types requested
+        
+    Returns:
+        Tuple of (is_valid, error_message)
+    """
+    if not report_types or len(report_types) == 0:
+        return False, "At least one report type must be specified"
+    
+    # Check for empty strings
+    if any(not report_type.strip() for report_type in report_types):
+        return False, "Report types cannot be empty"
+    
+    # Check minimum length for each report type
+    if any(len(report_type.strip()) < 2 for report_type in report_types):
+        return False, "Each report type must be at least 2 characters long"
+    
+    # Optional: Check against known report types (commented out to allow flexibility)
+    # valid_report_types = {
+    #     "executive summary", "technical report", "regulatory compliance report",
+    #     "gis maps package", "risk assessment report", "environmental management plan",
+    #     "emp", "public consultation materials", "interactive dashboard", "full report"
+    # }
+    # for report_type in report_types:
+    #     if report_type.lower().strip() not in valid_report_types:
+    #         return False, f"Unknown report type: {report_type}"
+    
+    return True, ""
+
+
 def validate_customer_name(name: str) -> Tuple[bool, str]:
     """
     Validate customer name (optional field)
@@ -151,6 +185,11 @@ def validate_all_requirements(requirements: Dict[str, Any]) -> Tuple[bool, List[
     if not is_valid:
         errors.append(f"Purpose: {error}")
     
+    # Validate report types
+    is_valid, error = validate_report_types(requirements.get('report_types', []))
+    if not is_valid:
+        errors.append(f"Report types: {error}")
+    
     # Add any cross-field validation here
     # Example: If location is in certain regions, require specific impact types
     
@@ -188,6 +227,15 @@ def sanitize_requirements(requirements: Dict[str, Any]) -> Dict[str, Any]:
     
     # Clean purpose
     sanitized['purpose'] = requirements.get('purpose', '').strip()
+    
+    # Clean report types - remove duplicates and empty strings
+    report_types = requirements.get('report_types', [])
+    if isinstance(report_types, str):
+        report_types = [r.strip() for r in report_types.split(',')]
+    sanitized['report_types'] = list(set([
+        rt.strip() for rt in report_types 
+        if rt and rt.strip()
+    ]))
     
     # Clean additional info
     additional = requirements.get('additional_info', '').strip()

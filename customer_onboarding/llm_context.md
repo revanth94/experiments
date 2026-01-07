@@ -40,7 +40,8 @@ Collect customer requirements through natural conversation.
    - Project location (specific geographic area)
    - Ecological impacts to assess
    - Purpose/use case
-   - Historical data timeframe
+   - Report types and deliverables needed
+   - Historical data timeframe (if applicable)
 4. **Validate** using `requirements_gathering/validators.py`
 5. **Save** to `collected_requirements/requirements_{customer}_{date}.json`
 
@@ -60,11 +61,7 @@ Collect customer requirements through natural conversation.
 ```json
 {
   "customer_name": "Biomet",
-  "project_location": {
-    "region": "Los Angeles County, California",
-    "coordinates": null,
-    "scale": "county"
-  },
+  "location": "Los Angeles County, California",
   "ecological_impacts": [
     "wildfire risk",
     "air quality impact",
@@ -72,9 +69,16 @@ Collect customer requirements through natural conversation.
     "soil erosion",
     "water quality impact"
   ],
-  "purpose": "Disaster planning",
-  "historical_data_years": 10,
-  "timestamp": "2026-01-07T16:15:30Z"
+  "purpose": "Disaster planning and preparedness",
+  "report_types": [
+    "executive summary",
+    "technical report",
+    "GIS maps package",
+    "risk assessment report"
+  ],
+  "additional_info": "Analyze historical patterns over the past 10 years",
+  "timestamp": "2026-01-07T16:15:30Z",
+  "status": "pending_analysis"
 }
 ```
 

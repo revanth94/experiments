@@ -12,6 +12,14 @@
     "water quality"
   ],
   "purpose": "Site feasibility assessment and regulatory compliance for datacentre development project",
+  "report_types": [
+    "comprehensive EIA report",
+    "technical report",
+    "environmental management plan",
+    "regulatory compliance report",
+    "GIS maps package",
+    "sustainability scorecard"
+  ],
   "additional_info": "None provided",
   "status": "pending_analysis"
 }
