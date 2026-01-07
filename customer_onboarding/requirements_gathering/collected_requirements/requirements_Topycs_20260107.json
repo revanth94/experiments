@@ -1,0 +1,26 @@
+{
+  "customer_name": "Topycs",
+  "timestamp": "2026-01-07 16:33:49",
+  "location": "Gachibowli area, Hyderabad, India",
+  "ecological_impacts": [
+    "energy consumption and carbon emissions",
+    "water usage",
+    "heat emissions and local temperature impacts",
+    "air quality",
+    "noise pollution",
+    "land use and habitat impacts",
+    "water quality"
+  ],
+  "purpose": "Site feasibility assessment and regulatory compliance for datacentre development project",
+  "report_types": [
+    "comprehensive EIA report",
+    "technical report",
+    "environmental management plan",
+    "regulatory compliance report",
+    "GIS maps package",
+    "sustainability scorecard"
+  ],
+  "additional_info": "None provided",
+  "status": "pending_analysis"
+}
+

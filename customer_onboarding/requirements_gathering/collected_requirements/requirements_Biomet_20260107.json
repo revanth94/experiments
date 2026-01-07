@@ -1,0 +1,24 @@
+{
+  "customer_name": "Biomet",
+  "timestamp": "2026-01-07 15:45:00",
+  "location": "Los Angeles County, California",
+  "ecological_impacts": [
+    "vegetation health and fuel load",
+    "drought conditions and soil moisture",
+    "air quality patterns",
+    "climate patterns",
+    "wildlife habitat vulnerability",
+    "post-fire erosion risk",
+    "water quality threats"
+  ],
+  "purpose": "Disaster planning and preparedness for wildfire risk assessment",
+  "report_types": [
+    "executive summary",
+    "technical report",
+    "GIS maps package",
+    "risk assessment report"
+  ],
+  "additional_info": "Analyze historical wildfire patterns and trends over the past 10 years",
+  "status": "pending_analysis"
+}
+

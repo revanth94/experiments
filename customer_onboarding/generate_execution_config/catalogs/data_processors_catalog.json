@@ -1,0 +1,161 @@
+{
+  "module": "data_processors",
+  "description": "Functions for preprocessing and transforming data",
+  "functions": [
+    {
+      "name": "preprocess_spatial_data",
+      "description": "Preprocess and align spatial datasets to common grid",
+      "parameters": {
+        "input_files": {
+          "type": "list",
+          "required": true,
+          "description": "List of input data file paths"
+        },
+        "target_crs": {
+          "type": "string",
+          "required": true,
+          "description": "Target coordinate reference system (e.g., 'EPSG:3857', 'EPSG:4326')"
+        },
+        "target_resolution": {
+          "type": "string",
+          "required": true,
+          "description": "Target spatial resolution (e.g., '30m', '100m', '1km')"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save preprocessed data"
+        }
+      },
+      "returns": "Path to preprocessed data file"
+    },
+    {
+      "name": "preprocess_temporal_data",
+      "description": "Preprocess temporal data (resampling, gap filling)",
+      "parameters": {
+        "input_file": {
+          "type": "string",
+          "required": true,
+          "description": "Input data file path"
+        },
+        "temporal_resolution": {
+          "type": "string",
+          "required": true,
+          "description": "Target temporal resolution",
+          "valid_values": ["hourly", "daily", "weekly", "monthly", "yearly"]
+        },
+        "aggregation_method": {
+          "type": "string",
+          "required": false,
+          "description": "Aggregation method for resampling",
+          "valid_values": ["mean", "sum", "max", "min", "median"],
+          "default": "mean"
+        },
+        "fill_gaps": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to fill temporal gaps",
+          "default": true
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save preprocessed data"
+        }
+      },
+      "returns": "Path to preprocessed data file"
+    },
+    {
+      "name": "merge_datasets",
+      "description": "Merge multiple datasets spatially or temporally",
+      "parameters": {
+        "input_files": {
+          "type": "list",
+          "required": true,
+          "description": "List of input data files to merge"
+        },
+        "merge_method": {
+          "type": "string",
+          "required": true,
+          "description": "Method for merging",
+          "valid_values": ["spatial_mosaic", "temporal_concat", "variable_merge"]
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save merged data"
+        }
+      },
+      "returns": "Path to merged data file"
+    },
+    {
+      "name": "extract_region",
+      "description": "Extract data for a specific geographic region",
+      "parameters": {
+        "input_file": {
+          "type": "string",
+          "required": true,
+          "description": "Input data file path"
+        },
+        "region": {
+          "type": "string",
+          "required": true,
+          "description": "Region to extract (location name or bounding box)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save extracted data"
+        }
+      },
+      "returns": "Path to extracted data file"
+    },
+    {
+      "name": "calculate_derivatives",
+      "description": "Calculate spatial derivatives (slope, aspect, etc.)",
+      "parameters": {
+        "input_file": {
+          "type": "string",
+          "required": true,
+          "description": "Input elevation/raster file"
+        },
+        "derivatives": {
+          "type": "list",
+          "required": true,
+          "description": "List of derivatives to calculate",
+          "valid_values": ["slope", "aspect", "hillshade", "curvature", "roughness"]
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save derivatives"
+        }
+      },
+      "returns": "Path to derivatives file"
+    },
+    {
+      "name": "normalize_data",
+      "description": "Normalize or standardize data values",
+      "parameters": {
+        "input_file": {
+          "type": "string",
+          "required": true,
+          "description": "Input data file"
+        },
+        "method": {
+          "type": "string",
+          "required": true,
+          "description": "Normalization method",
+          "valid_values": ["min-max", "z-score", "robust", "log"]
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save normalized data"
+        }
+      },
+      "returns": "Path to normalized data file"
+    }
+  ]
+}
+

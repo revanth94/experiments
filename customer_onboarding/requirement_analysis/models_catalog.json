@@ -1,0 +1,225 @@
+{
+  "analysis_models": [
+    {
+      "id": "wildfire_risk_index",
+      "name": "Wildfire Risk Index Model",
+      "description": "Comprehensive wildfire risk assessment combining vegetation, climate, and topography",
+      "applicable_to": ["wildfire risk", "fire hazard assessment", "disaster planning"],
+      "required_data": [
+        "vegetation health",
+        "fuel load",
+        "climate patterns",
+        "temperature",
+        "humidity",
+        "wind patterns",
+        "elevation",
+        "slope"
+      ],
+      "optional_data": [
+        "fire history",
+        "drought conditions",
+        "land cover"
+      ],
+      "outputs": [
+        "risk score (0-100)",
+        "risk zones map",
+        "probability estimates",
+        "seasonal risk variation"
+      ],
+      "computational_requirements": "medium",
+      "typical_runtime": "2-4 hours"
+    },
+    {
+      "id": "fuel_load_assessment",
+      "name": "Vegetation Fuel Load Model",
+      "description": "Estimates combustible biomass and fuel conditions",
+      "applicable_to": ["vegetation analysis", "fuel management", "fire behavior prediction"],
+      "required_data": [
+        "vegetation health",
+        "biomass density",
+        "land cover"
+      ],
+      "optional_data": [
+        "satellite imagery",
+        "precipitation",
+        "drought conditions"
+      ],
+      "outputs": [
+        "fuel load maps",
+        "fuel moisture content",
+        "treatment priority areas"
+      ],
+      "computational_requirements": "low",
+      "typical_runtime": "30 minutes to 1 hour"
+    },
+    {
+      "id": "drought_impact_model",
+      "name": "Drought Severity Impact Model",
+      "description": "Analyzes drought conditions and their impact on fire risk and ecosystems",
+      "applicable_to": ["drought assessment", "water management", "ecosystem health"],
+      "required_data": [
+        "drought conditions",
+        "soil moisture",
+        "precipitation"
+      ],
+      "optional_data": [
+        "temperature",
+        "vegetation health",
+        "water quality"
+      ],
+      "outputs": [
+        "drought severity maps",
+        "trend analysis",
+        "ecosystem stress indicators"
+      ],
+      "computational_requirements": "low",
+      "typical_runtime": "1-2 hours"
+    },
+    {
+      "id": "air_quality_fire_impact",
+      "name": "Fire-Related Air Quality Model",
+      "description": "Predicts air quality impacts from wildfire smoke",
+      "applicable_to": ["air quality assessment", "public health", "smoke management"],
+      "required_data": [
+        "air quality",
+        "particulate matter",
+        "wind patterns",
+        "fire history"
+      ],
+      "optional_data": [
+        "temperature",
+        "humidity",
+        "elevation"
+      ],
+      "outputs": [
+        "air quality index predictions",
+        "smoke dispersion patterns",
+        "health impact zones"
+      ],
+      "computational_requirements": "medium",
+      "typical_runtime": "3-5 hours"
+    },
+    {
+      "id": "habitat_vulnerability",
+      "name": "Wildlife Habitat Vulnerability Model",
+      "description": "Assesses wildlife habitat exposure to fire risk",
+      "applicable_to": ["wildlife conservation", "habitat management", "biodiversity"],
+      "required_data": [
+        "wildlife distribution",
+        "habitat vulnerability",
+        "fire history"
+      ],
+      "optional_data": [
+        "vegetation health",
+        "land cover",
+        "elevation"
+      ],
+      "outputs": [
+        "critical habitat maps",
+        "species risk scores",
+        "priority conservation areas"
+      ],
+      "computational_requirements": "low",
+      "typical_runtime": "1-2 hours"
+    },
+    {
+      "id": "post_fire_erosion",
+      "name": "Post-Fire Erosion Risk Model",
+      "description": "Predicts soil erosion and runoff risk after wildfire events",
+      "applicable_to": ["erosion assessment", "watershed management", "disaster recovery"],
+      "required_data": [
+        "soil type",
+        "erosion risk",
+        "slope",
+        "fire history"
+      ],
+      "optional_data": [
+        "precipitation",
+        "vegetation health",
+        "land cover"
+      ],
+      "outputs": [
+        "erosion susceptibility maps",
+        "runoff risk zones",
+        "mitigation priority areas"
+      ],
+      "computational_requirements": "medium",
+      "typical_runtime": "2-3 hours"
+    },
+    {
+      "id": "watershed_fire_impact",
+      "name": "Watershed Fire Impact Model",
+      "description": "Analyzes fire impacts on water quality and watershed health",
+      "applicable_to": ["water quality", "watershed management", "post-fire recovery"],
+      "required_data": [
+        "water quality",
+        "watershed health",
+        "fire history"
+      ],
+      "optional_data": [
+        "erosion risk",
+        "precipitation",
+        "vegetation health"
+      ],
+      "outputs": [
+        "water quality impact predictions",
+        "vulnerable watershed zones",
+        "recovery timelines"
+      ],
+      "computational_requirements": "medium",
+      "typical_runtime": "2-4 hours"
+    },
+    {
+      "id": "historical_pattern_analysis",
+      "name": "Historical Fire Pattern Analysis",
+      "description": "Analyzes historical fire patterns and trends over time",
+      "applicable_to": ["trend analysis", "long-term planning", "risk forecasting"],
+      "required_data": [
+        "fire history",
+        "burn patterns"
+      ],
+      "optional_data": [
+        "climate patterns",
+        "vegetation health",
+        "land cover"
+      ],
+      "outputs": [
+        "fire frequency maps",
+        "seasonal patterns",
+        "trend projections",
+        "return interval estimates"
+      ],
+      "computational_requirements": "low",
+      "typical_runtime": "1-2 hours"
+    },
+    {
+      "id": "integrated_fire_risk",
+      "name": "Integrated Multi-Factor Fire Risk Model",
+      "description": "Comprehensive model combining all fire-related factors for holistic assessment",
+      "applicable_to": ["comprehensive assessment", "disaster planning", "emergency management"],
+      "required_data": [
+        "vegetation health",
+        "climate patterns",
+        "drought conditions",
+        "fire history",
+        "elevation"
+      ],
+      "optional_data": [
+        "air quality",
+        "wildlife distribution",
+        "water quality",
+        "soil type",
+        "land cover"
+      ],
+      "outputs": [
+        "comprehensive risk assessment",
+        "multi-hazard maps",
+        "scenario analysis",
+        "planning recommendations"
+      ],
+      "computational_requirements": "high",
+      "typical_runtime": "6-10 hours"
+    }
+  ]
+}
+

@@ -1,0 +1,31 @@
+{
+  "description": "Index of all function catalogs",
+  "catalogs": [
+    {
+      "name": "Data Loaders",
+      "file": "data_loaders_catalog.json",
+      "module": "data_loaders",
+      "function_count": 10
+    },
+    {
+      "name": "Data Processors",
+      "file": "data_processors_catalog.json",
+      "module": "data_processors",
+      "function_count": 6
+    },
+    {
+      "name": "Analysis Models",
+      "file": "models_catalog.json",
+      "module": "models",
+      "function_count": 9
+    },
+    {
+      "name": "Reporting & Export",
+      "file": "reporting_catalog.json",
+      "module": "reporting",
+      "function_count": 5
+    }
+  ],
+  "total_functions": 30
+}
+

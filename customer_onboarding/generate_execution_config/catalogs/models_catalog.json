@@ -1,0 +1,350 @@
+{
+  "module": "models",
+  "description": "Functions for executing analysis models",
+  "functions": [
+    {
+      "name": "run_historical_pattern_analysis",
+      "description": "Execute historical fire pattern analysis model",
+      "parameters": {
+        "fire_history_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to fire history data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to climate data (optional)"
+        },
+        "vegetation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to vegetation data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save analysis results"
+        }
+      },
+      "returns": "Path to analysis results"
+    },
+    {
+      "name": "run_wildfire_risk_index",
+      "description": "Execute wildfire risk index model",
+      "parameters": {
+        "vegetation_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to vegetation data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to climate data"
+        },
+        "elevation_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to elevation data"
+        },
+        "fire_history_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to fire history data (optional)"
+        },
+        "drought_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to drought data (optional)"
+        },
+        "land_cover_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to land cover data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save risk assessment results"
+        }
+      },
+      "returns": "Path to risk assessment results"
+    },
+    {
+      "name": "run_fuel_load_assessment",
+      "description": "Execute vegetation fuel load model",
+      "parameters": {
+        "vegetation_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to vegetation data"
+        },
+        "land_cover_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to land cover data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to climate data (optional)"
+        },
+        "drought_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to drought data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save fuel assessment results"
+        }
+      },
+      "returns": "Path to fuel assessment results"
+    },
+    {
+      "name": "run_drought_impact_model",
+      "description": "Execute drought severity impact model",
+      "parameters": {
+        "drought_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to drought data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to climate data"
+        },
+        "vegetation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to vegetation data (optional)"
+        },
+        "water_quality_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to water quality data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save drought impact results"
+        }
+      },
+      "returns": "Path to drought impact results"
+    },
+    {
+      "name": "run_air_quality_fire_impact",
+      "description": "Execute fire-related air quality model",
+      "parameters": {
+        "air_quality_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to air quality data"
+        },
+        "fire_history_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to fire history data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to climate data (for wind patterns)"
+        },
+        "elevation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to elevation data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save air quality impact results"
+        }
+      },
+      "returns": "Path to air quality impact results"
+    },
+    {
+      "name": "run_habitat_vulnerability_model",
+      "description": "Execute wildlife habitat vulnerability model",
+      "parameters": {
+        "wildlife_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to wildlife habitat data"
+        },
+        "fire_history_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to fire history data"
+        },
+        "vegetation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to vegetation data (optional)"
+        },
+        "land_cover_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to land cover data (optional)"
+        },
+        "elevation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to elevation data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save habitat vulnerability results"
+        }
+      },
+      "returns": "Path to habitat vulnerability results"
+    },
+    {
+      "name": "run_post_fire_erosion_model",
+      "description": "Execute post-fire erosion risk model",
+      "parameters": {
+        "soil_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to soil erosion data"
+        },
+        "elevation_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to elevation data (for slope)"
+        },
+        "fire_history_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to fire history data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to climate data (optional)"
+        },
+        "vegetation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to vegetation data (optional)"
+        },
+        "land_cover_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to land cover data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save erosion risk results"
+        }
+      },
+      "returns": "Path to erosion risk results"
+    },
+    {
+      "name": "run_watershed_fire_impact_model",
+      "description": "Execute watershed fire impact model",
+      "parameters": {
+        "water_quality_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to water quality data"
+        },
+        "fire_history_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to fire history data"
+        },
+        "erosion_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to erosion risk data (optional)"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to climate data (optional)"
+        },
+        "vegetation_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to vegetation data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save watershed impact results"
+        }
+      },
+      "returns": "Path to watershed impact results"
+    },
+    {
+      "name": "run_integrated_fire_risk_model",
+      "description": "Execute integrated multi-factor fire risk model",
+      "parameters": {
+        "vegetation_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to vegetation data"
+        },
+        "climate_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to climate data"
+        },
+        "drought_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to drought data"
+        },
+        "fire_history_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to fire history data"
+        },
+        "elevation_data": {
+          "type": "string",
+          "required": true,
+          "description": "Path to elevation data"
+        },
+        "air_quality_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to air quality data (optional)"
+        },
+        "wildlife_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to wildlife data (optional)"
+        },
+        "water_quality_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to water quality data (optional)"
+        },
+        "soil_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to soil data (optional)"
+        },
+        "land_cover_data": {
+          "type": "string",
+          "required": false,
+          "description": "Path to land cover data (optional)"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save integrated risk results"
+        }
+      },
+      "returns": "Path to integrated risk results"
+    }
+  ]
+}
+

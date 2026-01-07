@@ -1,0 +1,125 @@
+{
+  "data_sources": [
+    {
+      "id": "satellite_vegetation",
+      "name": "Satellite Vegetation Index Data",
+      "description": "NDVI and vegetation health metrics from Landsat/Sentinel satellites",
+      "coverage": "Global",
+      "temporal_resolution": "Daily to 16-day",
+      "historical_range": "1984-present",
+      "data_types": ["vegetation health", "fuel load", "biomass density"],
+      "format": "GeoTIFF, NetCDF",
+      "cost": "free",
+      "update_frequency": "daily"
+    },
+    {
+      "id": "climate_station",
+      "name": "Weather Station Climate Data",
+      "description": "Temperature, humidity, wind speed, precipitation from ground stations",
+      "coverage": "Regional (US focus)",
+      "temporal_resolution": "Hourly",
+      "historical_range": "1950-present",
+      "data_types": ["temperature", "humidity", "wind patterns", "precipitation"],
+      "format": "CSV, JSON",
+      "cost": "free",
+      "update_frequency": "hourly"
+    },
+    {
+      "id": "drought_monitor",
+      "name": "US Drought Monitor",
+      "description": "Drought severity classifications and soil moisture data",
+      "coverage": "United States",
+      "temporal_resolution": "Weekly",
+      "historical_range": "2000-present",
+      "data_types": ["drought conditions", "soil moisture"],
+      "format": "Shapefile, GeoJSON",
+      "cost": "free",
+      "update_frequency": "weekly"
+    },
+    {
+      "id": "air_quality_epa",
+      "name": "EPA Air Quality System",
+      "description": "Air quality measurements including PM2.5, ozone, pollutants",
+      "coverage": "United States",
+      "temporal_resolution": "Hourly",
+      "historical_range": "1980-present",
+      "data_types": ["air quality", "particulate matter", "smoke patterns"],
+      "format": "CSV, API",
+      "cost": "free",
+      "update_frequency": "hourly"
+    },
+    {
+      "id": "wildfire_perimeters",
+      "name": "Historical Wildfire Perimeters",
+      "description": "Fire perimeter boundaries, burn severity, and fire history",
+      "coverage": "United States",
+      "temporal_resolution": "Event-based",
+      "historical_range": "1878-present",
+      "data_types": ["fire history", "burn patterns", "fire frequency"],
+      "format": "Shapefile, KML",
+      "cost": "free",
+      "update_frequency": "real-time during fire season"
+    },
+    {
+      "id": "wildlife_habitat",
+      "name": "Wildlife Habitat Database",
+      "description": "Species distribution, habitat maps, endangered species locations",
+      "coverage": "United States",
+      "temporal_resolution": "Annual updates",
+      "historical_range": "1990-present",
+      "data_types": ["wildlife distribution", "habitat vulnerability", "species presence"],
+      "format": "Shapefile, GeoJSON",
+      "cost": "free",
+      "update_frequency": "annually"
+    },
+    {
+      "id": "soil_erosion",
+      "name": "Soil Erosion Risk Maps",
+      "description": "Soil types, erosion susceptibility, topography, slope data",
+      "coverage": "United States",
+      "temporal_resolution": "Static with periodic updates",
+      "historical_range": "2000-present",
+      "data_types": ["soil type", "erosion risk", "topography"],
+      "format": "Raster, GeoTIFF",
+      "cost": "free",
+      "update_frequency": "every 5 years"
+    },
+    {
+      "id": "water_quality_usgs",
+      "name": "USGS Water Quality Data",
+      "description": "Stream flow, water chemistry, watershed health metrics",
+      "coverage": "United States",
+      "temporal_resolution": "Daily to monthly",
+      "historical_range": "1900-present",
+      "data_types": ["water quality", "watershed health", "stream conditions"],
+      "format": "CSV, API",
+      "cost": "free",
+      "update_frequency": "daily"
+    },
+    {
+      "id": "elevation_dem",
+      "name": "Digital Elevation Models",
+      "description": "High-resolution terrain and elevation data",
+      "coverage": "Global",
+      "temporal_resolution": "Static",
+      "historical_range": "Multiple vintages available",
+      "data_types": ["elevation", "slope", "aspect", "topography"],
+      "format": "GeoTIFF, ASCII",
+      "cost": "free",
+      "update_frequency": "periodic"
+    },
+    {
+      "id": "land_cover",
+      "name": "National Land Cover Database",
+      "description": "Land use, land cover classifications, urban interface maps",
+      "coverage": "United States",
+      "temporal_resolution": "Every 2-3 years",
+      "historical_range": "1992-present",
+      "data_types": ["land cover", "urban areas", "vegetation types"],
+      "format": "GeoTIFF",
+      "cost": "free",
+      "update_frequency": "every 2-3 years"
+    }
+  ]
+}
+

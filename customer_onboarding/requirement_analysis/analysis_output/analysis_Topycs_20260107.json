@@ -1,0 +1,356 @@
+{
+  "customer": "Topycs",
+  "requirements_ref": "requirements_Topycs_20260107.json",
+  "timestamp": "2026-01-07 16:35:00",
+  "status": "analysis_complete_with_gaps",
+  
+  "requirements_summary": {
+    "customer": "Topycs",
+    "location": "Gachibowli area, Hyderabad, India",
+    "impacts": [
+      "energy consumption and carbon emissions",
+      "water usage",
+      "heat emissions and local temperature impacts",
+      "air quality",
+      "noise pollution",
+      "land use and habitat impacts",
+      "water quality"
+    ],
+    "purpose": "Site feasibility assessment and regulatory compliance for datacentre development project"
+  },
+
+  "analysis_type": "datacentre_environmental_impact",
+  "geographic_scope": "India (Telangana State, Hyderabad Metropolitan Region)",
+
+  "data_sources_currently_available": [
+    {
+      "id": "satellite_vegetation",
+      "name": "Satellite Vegetation Index Data",
+      "justification": "Can provide baseline land use and vegetation assessment for the Gachibowli area to understand habitat impacts. Global coverage includes India.",
+      "data_types_used": ["vegetation health", "biomass density"],
+      "applicability": "Partial - useful for land use baseline but not specific to datacentre impacts",
+      "temporal_coverage": "1984-present"
+    },
+    {
+      "id": "elevation_dem",
+      "name": "Digital Elevation Models",
+      "justification": "Provides topography data for site characterization, drainage analysis, and understanding heat dispersion patterns. Global coverage includes India.",
+      "data_types_used": ["elevation", "slope", "aspect", "topography"],
+      "applicability": "Full - terrain data is universally applicable",
+      "temporal_coverage": "Multiple vintages available"
+    }
+  ],
+
+  "data_sources_needed": [
+    {
+      "id": "india_climate_imd",
+      "name": "India Meteorological Department (IMD) Climate Data",
+      "justification": "Required for baseline temperature, humidity, wind patterns, and precipitation data for Hyderabad region. Essential for assessing cooling requirements and heat island impacts.",
+      "data_types_needed": ["temperature", "humidity", "wind patterns", "precipitation", "solar radiation"],
+      "priority": "critical",
+      "suggested_source": "IMD API, NCEI India datasets"
+    },
+    {
+      "id": "india_air_quality_cpcb",
+      "name": "Central Pollution Control Board (CPCB) Air Quality Data",
+      "justification": "Baseline air quality for Hyderabad/Gachibowli area. Needed to assess incremental impacts from datacentre diesel generators and evaluate compliance with Indian air quality standards.",
+      "data_types_needed": ["PM2.5", "PM10", "NO2", "SO2", "CO", "ozone"],
+      "priority": "critical",
+      "suggested_source": "CPCB real-time monitoring network, State PCB Telangana"
+    },
+    {
+      "id": "india_water_resources",
+      "name": "Hyderabad Water Resources and Quality Data",
+      "justification": "Critical for assessing water availability for datacentre cooling systems and baseline water quality. Datacentres require significant water for cooling towers.",
+      "data_types_needed": ["groundwater levels", "surface water availability", "water quality parameters", "seasonal variation"],
+      "priority": "critical",
+      "suggested_source": "Central Ground Water Board (CGWB), Telangana State Water Resources Department"
+    },
+    {
+      "id": "india_land_use_gachibowli",
+      "name": "Gachibowli Area Land Use and Urban Planning Data",
+      "justification": "Current land use classification, urban zoning, protected areas, and sensitive receptors (schools, hospitals, residential areas) near the proposed site.",
+      "data_types_needed": ["land use classification", "zoning", "protected areas", "biodiversity hotspots", "urban density"],
+      "priority": "high",
+      "suggested_source": "Hyderabad Metropolitan Development Authority (HMDA), Survey of India"
+    },
+    {
+      "id": "india_biodiversity_telangana",
+      "name": "Telangana Biodiversity and Habitat Data",
+      "justification": "Identify any endangered species, critical habitats, or ecologically sensitive zones in the Gachibowli area that could be impacted by land use change.",
+      "data_types_needed": ["species presence", "habitat classification", "protected species", "ecological sensitivity zones"],
+      "priority": "medium",
+      "suggested_source": "Telangana State Biodiversity Board, Wildlife Institute of India"
+    },
+    {
+      "id": "india_energy_grid",
+      "name": "Telangana Power Grid and Energy Mix Data",
+      "justification": "Required for carbon footprint calculations - need to know the carbon intensity of grid electricity in Telangana (coal vs. renewable energy mix).",
+      "data_types_needed": ["grid energy mix", "carbon intensity factors", "grid reliability data"],
+      "priority": "high",
+      "suggested_source": "Telangana State Electricity Board (TSSPDCL), Central Electricity Authority"
+    },
+    {
+      "id": "india_noise_baseline",
+      "name": "Ambient Noise Level Data for Gachibowli",
+      "justification": "Baseline ambient noise levels to compare against datacentre-generated noise from cooling systems, generators, and HVAC equipment.",
+      "data_types_needed": ["ambient noise levels", "noise zoning classification", "sensitive receptors"],
+      "priority": "medium",
+      "suggested_source": "Telangana State PCB noise monitoring, urban noise surveys"
+    }
+  ],
+
+  "analysis_models_currently_available": [
+    {
+      "note": "No models in current catalog are applicable to datacentre environmental impact assessment. All 9 existing models focus on wildfire risk assessment in the United States."
+    }
+  ],
+
+  "analysis_models_needed": [
+    {
+      "id": "datacentre_energy_carbon",
+      "name": "Datacentre Energy Consumption and Carbon Footprint Model",
+      "justification": "Core model for calculating energy usage based on IT load, cooling requirements, and PUE (Power Usage Effectiveness). Must calculate Scope 1, 2, and 3 emissions based on India grid factors.",
+      "addresses_impacts": ["energy consumption and carbon emissions"],
+      "execution_order": 1,
+      "required_inputs": [
+        "planned IT capacity (MW)",
+        "PUE estimate",
+        "grid carbon intensity",
+        "backup generator specifications",
+        "climate data (for cooling load estimation)"
+      ],
+      "outputs": [
+        "Annual energy consumption (MWh)",
+        "Annual CO2 emissions (tonnes)",
+        "Breakdown by Scope 1/2/3",
+        "Renewable energy offset potential"
+      ],
+      "priority": "critical"
+    },
+    {
+      "id": "datacentre_water_usage",
+      "name": "Datacentre Water Consumption and Thermal Impact Model",
+      "justification": "Calculates water requirements for cooling systems (evaporative cooling towers vs. air-cooled chillers) and assesses thermal pollution from wastewater discharge.",
+      "addresses_impacts": ["water usage", "water quality", "heat emissions and local temperature impacts"],
+      "execution_order": 2,
+      "required_inputs": [
+        "IT capacity and heat generation",
+        "cooling system design (water vs. air cooled)",
+        "local climate data",
+        "water availability data",
+        "wastewater discharge standards"
+      ],
+      "outputs": [
+        "Annual water consumption (million liters)",
+        "Peak water demand",
+        "Wastewater volume and thermal load",
+        "Water stress impact assessment",
+        "Alternative cooling technology comparison"
+      ],
+      "priority": "critical"
+    },
+    {
+      "id": "urban_heat_island",
+      "name": "Urban Heat Island and Microclimate Impact Model",
+      "justification": "Assesses heat rejected from datacentre cooling systems and its impact on local ambient temperatures. Critical for urban areas like Gachibowli.",
+      "addresses_impacts": ["heat emissions and local temperature impacts"],
+      "execution_order": 3,
+      "required_inputs": [
+        "Heat rejection rate from cooling systems",
+        "Building footprint and height",
+        "Local wind patterns",
+        "Urban density data",
+        "Baseline temperature data"
+      ],
+      "outputs": [
+        "Temperature increase predictions (within 500m radius)",
+        "Heat island intensity maps",
+        "Seasonal variation analysis",
+        "Mitigation strategies (green roofs, landscaping)"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "air_quality_datacenter",
+      "name": "Datacentre Air Quality Impact Model",
+      "justification": "Assesses air emissions from diesel backup generators, emergency testing, and any on-site combustion equipment. Compares to Indian NAAQS (National Ambient Air Quality Standards).",
+      "addresses_impacts": ["air quality"],
+      "execution_order": 4,
+      "required_inputs": [
+        "Generator specifications and fuel type",
+        "Testing/operation schedule",
+        "Emission factors",
+        "Meteorological data (dispersion modeling)",
+        "Baseline air quality",
+        "Sensitive receptor locations"
+      ],
+      "outputs": [
+        "Pollutant concentration predictions (PM, NOx, SO2, CO)",
+        "Dispersion modeling results",
+        "Compliance assessment vs. Indian standards",
+        "Health impact screening",
+        "Emission control recommendations"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "noise_assessment_datacenter",
+      "name": "Datacentre Noise Impact Assessment Model",
+      "justification": "Evaluates noise from cooling towers, chillers, generators, HVAC systems, and transformers. Assesses compliance with Indian noise standards (Industrial/Commercial/Residential zone limits).",
+      "addresses_impacts": ["noise pollution"],
+      "execution_order": 5,
+      "required_inputs": [
+        "Equipment specifications and sound power levels",
+        "Building layout and barrier design",
+        "Distance to sensitive receptors",
+        "Ambient noise baseline",
+        "Indian noise standards for zone classification"
+      ],
+      "outputs": [
+        "Noise contour maps (dB levels at various distances)",
+        "Compliance assessment vs. Indian standards",
+        "Day vs. night noise levels",
+        "Noise mitigation recommendations (barriers, enclosures)",
+        "Community impact assessment"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "land_use_habitat_impact",
+      "name": "Land Use Change and Habitat Impact Model",
+      "justification": "Assesses direct habitat loss from site development, fragmentation effects, and impacts on local biodiversity. Identifies any protected species or critical habitats.",
+      "addresses_impacts": ["land use and habitat impacts"],
+      "execution_order": 6,
+      "required_inputs": [
+        "Site footprint and area",
+        "Current land cover/vegetation",
+        "Biodiversity surveys",
+        "Protected area proximity",
+        "Species presence data",
+        "Ecological sensitivity zoning"
+      ],
+      "outputs": [
+        "Habitat loss quantification (area and type)",
+        "Species impact assessment",
+        "Ecological sensitivity rating",
+        "Biodiversity offset requirements",
+        "Mitigation and compensation measures"
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "integrated_datacenter_eia",
+      "name": "Integrated Datacentre Environmental Impact Assessment",
+      "justification": "Comprehensive model combining all impact categories to produce integrated assessment aligned with Indian EIA notification requirements (2006, as amended).",
+      "addresses_impacts": ["all impacts - integrated assessment"],
+      "execution_order": 7,
+      "required_inputs": [
+        "Outputs from all individual impact models",
+        "Regulatory compliance requirements",
+        "Mitigation measures",
+        "Monitoring plans"
+      ],
+      "outputs": [
+        "Comprehensive EIA report",
+        "Cumulative impact assessment",
+        "Regulatory compliance matrix",
+        "Environmental Management Plan (EMP)",
+        "Monitoring and reporting framework",
+        "Sustainability scorecard"
+      ],
+      "priority": "critical",
+      "dependencies": ["All previous models"]
+    }
+  ],
+
+  "analysis_plan": {
+    "primary_goal": "Conduct comprehensive ecological impact assessment for proposed datacentre in Gachibowli, Hyderabad to support site feasibility evaluation and regulatory compliance with Indian environmental laws (Environment Protection Act, Water Act, Air Act, EIA Notification 2006).",
+    
+    "workflow_steps": [
+      "Phase 1: Data Collection - Gather baseline environmental data for Gachibowli area (climate, air quality, water resources, land use, biodiversity, noise levels)",
+      "Phase 2: Baseline Characterization - Establish pre-project environmental conditions using satellite imagery, terrain data, and local monitoring data",
+      "Phase 3: Impact Prediction - Energy/Carbon - Calculate energy consumption and carbon footprint based on datacentre design specifications",
+      "Phase 4: Impact Prediction - Water Resources - Assess water demand, availability, and thermal pollution potential",
+      "Phase 5: Impact Prediction - Heat Island - Model microclimate impacts from heat rejection",
+      "Phase 6: Impact Prediction - Air Quality - Dispersion modeling for generator emissions and compliance assessment",
+      "Phase 7: Impact Prediction - Noise - Acoustic modeling and compliance with Indian noise standards",
+      "Phase 8: Impact Prediction - Land Use/Habitat - Biodiversity impact assessment and habitat evaluation",
+      "Phase 9: Integrated Assessment - Combine all impact predictions into comprehensive EIA",
+      "Phase 10: Mitigation Design - Develop Environmental Management Plan with mitigation measures",
+      "Phase 11: Regulatory Mapping - Map findings to Indian environmental clearance requirements",
+      "Phase 12: Deliverables - Prepare final reports, GIS maps, and compliance documentation"
+    ],
+    
+    "estimated_timeline": "45-60 days (given data collection requirements and model development needs)",
+    "computational_requirements": "Medium (individual models are low-medium complexity, but comprehensive data processing required)",
+    
+    "deliverables": [
+      "Comprehensive Environmental Impact Assessment Report (EIA)",
+      "Baseline environmental characterization report",
+      "Energy consumption and carbon footprint analysis",
+      "Water resource impact assessment",
+      "Air quality impact assessment with dispersion modeling",
+      "Noise impact assessment with contour maps",
+      "Biodiversity and habitat impact assessment",
+      "Environmental Management Plan (EMP)",
+      "Environmental Monitoring Plan",
+      "Regulatory compliance matrix (aligned with Indian EIA requirements)",
+      "GIS maps package (all impact categories)",
+      "Site suitability assessment and recommendations",
+      "Sustainability scorecard and green datacentre recommendations"
+    ]
+  },
+
+  "data_gaps": [
+    "CRITICAL: No India-specific climate data sources in current catalog (need IMD data)",
+    "CRITICAL: No India-specific air quality data sources (need CPCB/State PCB data)",
+    "CRITICAL: No India-specific water resource data (need CGWB, state water department data)",
+    "CRITICAL: All 9 analysis models in current catalog are wildfire-focused for US locations",
+    "HIGH: No datacentre-specific environmental impact models in current library",
+    "HIGH: No urban planning/land use data sources for Indian cities",
+    "MEDIUM: No India-specific biodiversity databases integrated",
+    "MEDIUM: No noise baseline data sources for urban Indian locations",
+    "MEDIUM: No India energy grid carbon intensity factors in catalog",
+    "The current system is optimized for wildfire risk in US; datacentre EIA in India requires substantial catalog expansion"
+  ],
+
+  "recommendations": [
+    "SHORT-TERM: Integrate India Meteorological Department (IMD) API for climate data access",
+    "SHORT-TERM: Add CPCB air quality monitoring network data feeds",
+    "SHORT-TERM: Develop datacentre energy/carbon footprint model using international best practices (ASHRAE, Green Grid metrics)",
+    "SHORT-TERM: Develop datacentre water consumption model with Indian climate considerations",
+    "MEDIUM-TERM: Develop comprehensive datacentre environmental impact model suite (air, noise, heat island, habitat)",
+    "MEDIUM-TERM: Integrate Indian environmental standards and compliance frameworks into validation",
+    "MEDIUM-TERM: Add State-level environmental data sources (Telangana State PCB, water resources, urban planning)",
+    "LONG-TERM: Expand system to support industrial facility EIA assessments beyond wildfire risk",
+    "LONG-TERM: Create regional catalog variants (India, EU, Asia-Pacific) with appropriate data sources",
+    "PROCESS: Engage with Telangana State PCB and HMDA to understand specific local requirements for Gachibowli area",
+    "PROCESS: Conduct preliminary site reconnaissance and baseline surveys to inform detailed assessment",
+    "TECHNICAL: Consider partnering with Indian environmental consultancies for local expertise and data access",
+    "REGULATORY: Review MoEFCC (Ministry of Environment, Forest and Climate Change) EIA notification requirements - datacentres may require formal Environmental Clearance depending on size",
+    "FEASIBILITY: For immediate Topycs project needs, recommend engaging specialized datacentre EIA consultancy in India while this system is enhanced"
+  ],
+
+  "regulatory_context": {
+    "applicable_indian_laws": [
+      "Environment (Protection) Act, 1986",
+      "Air (Prevention and Control of Pollution) Act, 1981",
+      "Water (Prevention and Control of Pollution) Act, 1974",
+      "EIA Notification 2006 (as amended) - MoEFCC",
+      "Noise Pollution (Regulation and Control) Rules, 2000",
+      "Telangana State Pollution Control Board regulations"
+    ],
+    "clearance_requirements": "To be determined based on datacentre size/capacity - projects above certain thresholds require Environmental Clearance from State or Central authorities",
+    "note": "This analysis should be validated against current Indian regulatory requirements for IT/datacentre projects"
+  },
+
+  "next_steps_if_gaps_addressed": [
+    "Once data sources and models are added to catalog, proceed to Phase 3: Generate Execution Config",
+    "Execution config would map each impact model to appropriate function implementations",
+    "Phase 4: Run Analysis would execute all models and generate comprehensive EIA deliverables"
+  ],
+
+  "current_feasibility_status": "SYSTEM ENHANCEMENT REQUIRED - Current catalog and model library cannot fully support this project. Recommend parallel track: (1) Enhance system for datacentre/industrial EIA, (2) Engage specialized consultant for immediate Topycs needs."
+}
+
