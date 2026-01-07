@@ -1,0 +1,580 @@
+{
+  "config_id": "exec_biomet_la_wildfire_20260107",
+  "analysis_id": "biomet_la_wildfire_20260107",
+  "timestamp": "2026-01-07 17:00:00",
+  "customer": "Biomet",
+  "location": "Los Angeles County, California",
+  "execution_mode": "hybrid",
+  "description": "Comprehensive 10-year wildfire risk assessment for disaster planning",
+  
+  "step_groups": {
+    "data_loading": {
+      "description": "Load all required data sources",
+      "module": "data_loaders",
+      "parallel": true,
+      "step_ids": [
+        "load_satellite_vegetation",
+        "load_climate_data",
+        "load_drought_data",
+        "load_air_quality_data",
+        "load_wildfire_perimeters",
+        "load_wildlife_habitat",
+        "load_soil_erosion",
+        "load_water_quality",
+        "load_elevation_dem",
+        "load_land_cover"
+      ]
+    },
+    "preprocessing": {
+      "description": "Preprocess and align datasets",
+      "module": "data_processors",
+      "parallel": true,
+      "step_ids": [
+        "preprocess_spatial_raster",
+        "preprocess_climate_temporal"
+      ]
+    },
+    "core_models": {
+      "description": "Core analysis models",
+      "module": "models",
+      "parallel": false,
+      "step_ids": [
+        "run_historical_pattern_analysis",
+        "run_wildfire_risk_index"
+      ]
+    },
+    "individual_models": {
+      "description": "Individual impact assessment models",
+      "module": "models",
+      "parallel": true,
+      "step_ids": [
+        "run_fuel_load_assessment",
+        "run_drought_impact_model",
+        "run_air_quality_fire_impact",
+        "run_habitat_vulnerability_model",
+        "run_post_fire_erosion_model"
+      ]
+    },
+    "dependent_models": {
+      "description": "Models dependent on erosion assessment",
+      "module": "models",
+      "parallel": false,
+      "step_ids": [
+        "run_watershed_fire_impact_model"
+      ]
+    },
+    "integrated_analysis": {
+      "description": "Comprehensive synthesis",
+      "module": "models",
+      "parallel": false,
+      "step_ids": [
+        "run_integrated_fire_risk_model"
+      ]
+    },
+    "reporting": {
+      "description": "Generate reports and export results",
+      "module": "reporting",
+      "parallel": true,
+      "step_ids": [
+        "generate_executive_summary",
+        "generate_technical_report",
+        "export_gis_package_shapefiles",
+        "export_gis_package_geotiff"
+      ]
+    }
+  },
+  
+  "steps": [
+    {
+      "step_id": "load_satellite_vegetation",
+      "step_name": "Load Satellite Vegetation Data",
+      "group": "data_loading",
+      "function": "load_satellite_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "start_date": "2014-01-01",
+        "end_date": "2024-12-31",
+        "data_types": ["vegetation health", "fuel load", "biomass density"],
+        "output_path": "data/biomet_la/loaded/satellite_vegetation_2014_2024.nc"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/satellite_vegetation_2014_2024.nc",
+      "estimated_runtime": "2-3 hours"
+    },
+    {
+      "step_id": "load_climate_data",
+      "step_name": "Load Weather Station Climate Data",
+      "group": "data_loading",
+      "function": "load_climate_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "start_date": "2014-01-01",
+        "end_date": "2024-12-31",
+        "data_types": ["temperature", "humidity", "wind patterns", "precipitation"],
+        "output_path": "data/biomet_la/loaded/climate_data_2014_2024.nc"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/climate_data_2014_2024.nc",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "load_drought_data",
+      "step_name": "Load US Drought Monitor Data",
+      "group": "data_loading",
+      "function": "load_drought_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "start_date": "2014-01-01",
+        "end_date": "2024-12-31",
+        "output_path": "data/biomet_la/loaded/drought_data_2014_2024.nc"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/drought_data_2014_2024.nc",
+      "estimated_runtime": "30-60 minutes"
+    },
+    {
+      "step_id": "load_air_quality_data",
+      "step_name": "Load EPA Air Quality Data",
+      "group": "data_loading",
+      "function": "load_air_quality_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "start_date": "2014-01-01",
+        "end_date": "2024-12-31",
+        "output_path": "data/biomet_la/loaded/air_quality_2014_2024.nc"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/air_quality_2014_2024.nc",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "load_wildfire_perimeters",
+      "step_name": "Load Historical Wildfire Perimeters",
+      "group": "data_loading",
+      "function": "load_wildfire_perimeters",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "start_date": "2014-01-01",
+        "end_date": "2024-12-31",
+        "output_path": "data/biomet_la/loaded/wildfire_perimeters_2014_2024.shp"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/wildfire_perimeters_2014_2024.shp",
+      "estimated_runtime": "30-60 minutes"
+    },
+    {
+      "step_id": "load_wildlife_habitat",
+      "step_name": "Load Wildlife Habitat Data",
+      "group": "data_loading",
+      "function": "load_wildlife_habitat_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "output_path": "data/biomet_la/loaded/wildlife_habitat.shp"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/wildlife_habitat.shp",
+      "estimated_runtime": "30 minutes"
+    },
+    {
+      "step_id": "load_soil_erosion",
+      "step_name": "Load Soil Erosion Risk Maps",
+      "group": "data_loading",
+      "function": "load_soil_erosion_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "output_path": "data/biomet_la/loaded/soil_erosion.tif"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/soil_erosion.tif",
+      "estimated_runtime": "30 minutes"
+    },
+    {
+      "step_id": "load_water_quality",
+      "step_name": "Load USGS Water Quality Data",
+      "group": "data_loading",
+      "function": "load_water_quality_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "start_date": "2014-01-01",
+        "end_date": "2024-12-31",
+        "output_path": "data/biomet_la/loaded/water_quality_2014_2024.csv"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/water_quality_2014_2024.csv",
+      "estimated_runtime": "1 hour"
+    },
+    {
+      "step_id": "load_elevation_dem",
+      "step_name": "Load Digital Elevation Models",
+      "group": "data_loading",
+      "function": "load_elevation_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "resolution": "30m",
+        "output_path": "data/biomet_la/loaded/elevation_dem.tif"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/elevation_dem.tif",
+      "estimated_runtime": "1 hour"
+    },
+    {
+      "step_id": "load_land_cover",
+      "step_name": "Load National Land Cover Database",
+      "group": "data_loading",
+      "function": "load_land_cover_data",
+      "module": "data_loaders",
+      "arguments": {
+        "location": "Los Angeles County, California",
+        "year": 2021,
+        "output_path": "data/biomet_la/loaded/land_cover_2021.tif"
+      },
+      "depends_on": [],
+      "output": "data/biomet_la/loaded/land_cover_2021.tif",
+      "estimated_runtime": "1 hour"
+    },
+    {
+      "step_id": "preprocess_spatial_raster",
+      "step_name": "Preprocess and Align Spatial Raster Data",
+      "group": "preprocessing",
+      "function": "preprocess_spatial_data",
+      "module": "data_processors",
+      "arguments": {
+        "input_files": [
+          "$load_satellite_vegetation",
+          "$load_elevation_dem",
+          "$load_land_cover",
+          "$load_soil_erosion"
+        ],
+        "target_crs": "EPSG:3857",
+        "target_resolution": "30m",
+        "output_path": "data/biomet_la/preprocessed/spatial_raster_aligned.nc"
+      },
+      "depends_on": ["load_satellite_vegetation", "load_elevation_dem", "load_land_cover", "load_soil_erosion"],
+      "output": "data/biomet_la/preprocessed/spatial_raster_aligned.nc",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "preprocess_climate_temporal",
+      "step_name": "Preprocess Climate Data Temporal Resolution",
+      "group": "preprocessing",
+      "function": "preprocess_temporal_data",
+      "module": "data_processors",
+      "arguments": {
+        "input_file": "$load_climate_data",
+        "temporal_resolution": "daily",
+        "aggregation_method": "mean",
+        "output_path": "data/biomet_la/preprocessed/climate_daily.nc"
+      },
+      "depends_on": ["load_climate_data"],
+      "output": "data/biomet_la/preprocessed/climate_daily.nc",
+      "estimated_runtime": "30 minutes"
+    },
+    {
+      "step_id": "run_historical_pattern_analysis",
+      "step_name": "Execute Historical Fire Pattern Analysis",
+      "group": "core_models",
+      "function": "run_historical_pattern_analysis",
+      "module": "models",
+      "arguments": {
+        "fire_history_data": "$load_wildfire_perimeters",
+        "climate_data": "$preprocess_climate_temporal",
+        "output_path": "results/biomet_la/historical_pattern_analysis.nc"
+      },
+      "depends_on": ["load_wildfire_perimeters", "preprocess_climate_temporal"],
+      "output": "results/biomet_la/historical_pattern_analysis.nc",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "run_wildfire_risk_index",
+      "step_name": "Execute Wildfire Risk Index Model",
+      "group": "core_models",
+      "function": "run_wildfire_risk_index",
+      "module": "models",
+      "arguments": {
+        "vegetation_data": "$load_satellite_vegetation",
+        "climate_data": "$preprocess_climate_temporal",
+        "elevation_data": "$load_elevation_dem",
+        "fire_history_data": "$load_wildfire_perimeters",
+        "drought_data": "$load_drought_data",
+        "output_path": "results/biomet_la/wildfire_risk_index.tif"
+      },
+      "depends_on": ["load_satellite_vegetation", "preprocess_climate_temporal", "load_elevation_dem", "load_wildfire_perimeters", "load_drought_data"],
+      "output": "results/biomet_la/wildfire_risk_index.tif",
+      "estimated_runtime": "2-4 hours"
+    },
+    {
+      "step_id": "run_fuel_load_assessment",
+      "step_name": "Execute Vegetation Fuel Load Model",
+      "group": "individual_models",
+      "function": "run_fuel_load_assessment",
+      "module": "models",
+      "arguments": {
+        "vegetation_data": "$load_satellite_vegetation",
+        "land_cover_data": "$load_land_cover",
+        "climate_data": "$preprocess_climate_temporal",
+        "output_path": "results/biomet_la/fuel_load_assessment.tif"
+      },
+      "depends_on": ["load_satellite_vegetation", "load_land_cover", "preprocess_climate_temporal"],
+      "output": "results/biomet_la/fuel_load_assessment.tif",
+      "estimated_runtime": "30-60 minutes"
+    },
+    {
+      "step_id": "run_drought_impact_model",
+      "step_name": "Execute Drought Severity Impact Model",
+      "group": "individual_models",
+      "function": "run_drought_impact_model",
+      "module": "models",
+      "arguments": {
+        "drought_data": "$load_drought_data",
+        "climate_data": "$preprocess_climate_temporal",
+        "vegetation_data": "$load_satellite_vegetation",
+        "output_path": "results/biomet_la/drought_impact_assessment.nc"
+      },
+      "depends_on": ["load_drought_data", "preprocess_climate_temporal", "load_satellite_vegetation"],
+      "output": "results/biomet_la/drought_impact_assessment.nc",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "run_air_quality_fire_impact",
+      "step_name": "Execute Fire-Related Air Quality Model",
+      "group": "individual_models",
+      "function": "run_air_quality_fire_impact",
+      "module": "models",
+      "arguments": {
+        "air_quality_data": "$load_air_quality_data",
+        "fire_history_data": "$load_wildfire_perimeters",
+        "climate_data": "$preprocess_climate_temporal",
+        "elevation_data": "$load_elevation_dem",
+        "output_path": "results/biomet_la/air_quality_fire_impact.nc"
+      },
+      "depends_on": ["load_air_quality_data", "load_wildfire_perimeters", "preprocess_climate_temporal", "load_elevation_dem"],
+      "output": "results/biomet_la/air_quality_fire_impact.nc",
+      "estimated_runtime": "3-5 hours"
+    },
+    {
+      "step_id": "run_habitat_vulnerability_model",
+      "step_name": "Execute Wildlife Habitat Vulnerability Model",
+      "group": "individual_models",
+      "function": "run_habitat_vulnerability_model",
+      "module": "models",
+      "arguments": {
+        "wildlife_data": "$load_wildlife_habitat",
+        "fire_history_data": "$load_wildfire_perimeters",
+        "vegetation_data": "$load_satellite_vegetation",
+        "output_path": "results/biomet_la/habitat_vulnerability.shp"
+      },
+      "depends_on": ["load_wildlife_habitat", "load_wildfire_perimeters", "load_satellite_vegetation"],
+      "output": "results/biomet_la/habitat_vulnerability.shp",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "run_post_fire_erosion_model",
+      "step_name": "Execute Post-Fire Erosion Risk Model",
+      "group": "individual_models",
+      "function": "run_post_fire_erosion_model",
+      "module": "models",
+      "arguments": {
+        "soil_data": "$load_soil_erosion",
+        "elevation_data": "$load_elevation_dem",
+        "fire_history_data": "$load_wildfire_perimeters",
+        "climate_data": "$preprocess_climate_temporal",
+        "output_path": "results/biomet_la/post_fire_erosion.tif"
+      },
+      "depends_on": ["load_soil_erosion", "load_elevation_dem", "load_wildfire_perimeters", "preprocess_climate_temporal"],
+      "output": "results/biomet_la/post_fire_erosion.tif",
+      "estimated_runtime": "2-3 hours"
+    },
+    {
+      "step_id": "run_watershed_fire_impact_model",
+      "step_name": "Execute Watershed Fire Impact Model",
+      "group": "dependent_models",
+      "function": "run_watershed_fire_impact_model",
+      "module": "models",
+      "arguments": {
+        "water_quality_data": "$load_water_quality",
+        "fire_history_data": "$load_wildfire_perimeters",
+        "erosion_data": "$run_post_fire_erosion_model",
+        "output_path": "results/biomet_la/watershed_fire_impact.nc"
+      },
+      "depends_on": ["load_water_quality", "load_wildfire_perimeters", "run_post_fire_erosion_model"],
+      "output": "results/biomet_la/watershed_fire_impact.nc",
+      "estimated_runtime": "2-4 hours"
+    },
+    {
+      "step_id": "run_integrated_fire_risk_model",
+      "step_name": "Execute Integrated Multi-Factor Fire Risk Model",
+      "group": "integrated_analysis",
+      "function": "run_integrated_fire_risk_model",
+      "module": "models",
+      "arguments": {
+        "vegetation_data": "$load_satellite_vegetation",
+        "climate_data": "$preprocess_climate_temporal",
+        "drought_data": "$load_drought_data",
+        "fire_history_data": "$load_wildfire_perimeters",
+        "elevation_data": "$load_elevation_dem",
+        "air_quality_data": "$load_air_quality_data",
+        "wildlife_data": "$load_wildlife_habitat",
+        "water_quality_data": "$load_water_quality",
+        "soil_data": "$load_soil_erosion",
+        "output_path": "results/biomet_la/integrated_fire_risk.nc"
+      },
+      "depends_on": [
+        "run_wildfire_risk_index",
+        "run_fuel_load_assessment",
+        "run_drought_impact_model",
+        "run_air_quality_fire_impact",
+        "run_habitat_vulnerability_model",
+        "run_post_fire_erosion_model",
+        "run_watershed_fire_impact_model"
+      ],
+      "output": "results/biomet_la/integrated_fire_risk.nc",
+      "estimated_runtime": "6-10 hours"
+    },
+    {
+      "step_id": "generate_executive_summary",
+      "step_name": "Generate Executive Summary Report",
+      "group": "reporting",
+      "function": "generate_report",
+      "module": "reporting",
+      "arguments": {
+        "analysis_results": [
+          "$run_historical_pattern_analysis",
+          "$run_wildfire_risk_index",
+          "$run_integrated_fire_risk_model"
+        ],
+        "report_type": "executive_summary",
+        "output_path": "reports/biomet_la/executive_summary.pdf"
+      },
+      "depends_on": ["run_historical_pattern_analysis", "run_wildfire_risk_index", "run_integrated_fire_risk_model"],
+      "output": "reports/biomet_la/executive_summary.pdf",
+      "estimated_runtime": "1 hour"
+    },
+    {
+      "step_id": "generate_technical_report",
+      "step_name": "Generate Technical Report",
+      "group": "reporting",
+      "function": "generate_report",
+      "module": "reporting",
+      "arguments": {
+        "analysis_results": [
+          "$run_historical_pattern_analysis",
+          "$run_wildfire_risk_index",
+          "$run_fuel_load_assessment",
+          "$run_drought_impact_model",
+          "$run_air_quality_fire_impact",
+          "$run_habitat_vulnerability_model",
+          "$run_post_fire_erosion_model",
+          "$run_watershed_fire_impact_model",
+          "$run_integrated_fire_risk_model"
+        ],
+        "report_type": "full_report",
+        "output_path": "reports/biomet_la/technical_report.pdf"
+      },
+      "depends_on": ["run_integrated_fire_risk_model"],
+      "output": "reports/biomet_la/technical_report.pdf",
+      "estimated_runtime": "2 hours"
+    },
+    {
+      "step_id": "export_gis_package_shapefiles",
+      "step_name": "Export GIS Package (Shapefiles)",
+      "group": "reporting",
+      "function": "export_gis_package",
+      "module": "reporting",
+      "arguments": {
+        "data_files": [
+          "$run_wildfire_risk_index",
+          "$run_fuel_load_assessment",
+          "$run_drought_impact_model",
+          "$run_air_quality_fire_impact",
+          "$run_habitat_vulnerability_model",
+          "$run_post_fire_erosion_model",
+          "$run_watershed_fire_impact_model",
+          "$run_integrated_fire_risk_model"
+        ],
+        "output_format": "shapefile",
+        "output_path": "deliverables/biomet_la/gis_package_shp.zip"
+      },
+      "depends_on": ["run_integrated_fire_risk_model"],
+      "output": "deliverables/biomet_la/gis_package_shp.zip",
+      "estimated_runtime": "30 minutes"
+    },
+    {
+      "step_id": "export_gis_package_geotiff",
+      "step_name": "Export GIS Package (GeoTIFF)",
+      "group": "reporting",
+      "function": "export_gis_package",
+      "module": "reporting",
+      "arguments": {
+        "data_files": [
+          "$run_wildfire_risk_index",
+          "$run_fuel_load_assessment",
+          "$run_post_fire_erosion_model"
+        ],
+        "output_format": "geotiff",
+        "output_path": "deliverables/biomet_la/gis_package_tif.zip"
+      },
+      "depends_on": ["run_integrated_fire_risk_model"],
+      "output": "deliverables/biomet_la/gis_package_tif.zip",
+      "estimated_runtime": "30 minutes"
+    }
+  ],
+  
+  "execution_plan": {
+    "phase_1": {
+      "name": "Data Loading",
+      "groups": ["data_loading"],
+      "parallel": true,
+      "estimated_runtime": "2-3 hours (parallel)"
+    },
+    "phase_2": {
+      "name": "Data Preprocessing",
+      "groups": ["preprocessing"],
+      "parallel": true,
+      "estimated_runtime": "1-2 hours (parallel)"
+    },
+    "phase_3": {
+      "name": "Core Risk Assessment",
+      "groups": ["core_models"],
+      "parallel": false,
+      "estimated_runtime": "3-6 hours (sequential)"
+    },
+    "phase_4": {
+      "name": "Individual Impact Models",
+      "groups": ["individual_models"],
+      "parallel": true,
+      "estimated_runtime": "3-5 hours (parallel)"
+    },
+    "phase_5": {
+      "name": "Dependent Models",
+      "groups": ["dependent_models"],
+      "parallel": false,
+      "estimated_runtime": "2-4 hours (sequential)"
+    },
+    "phase_6": {
+      "name": "Integrated Analysis",
+      "groups": ["integrated_analysis"],
+      "parallel": false,
+      "estimated_runtime": "6-10 hours (sequential)"
+    },
+    "phase_7": {
+      "name": "Reporting and Export",
+      "groups": ["reporting"],
+      "parallel": true,
+      "estimated_runtime": "2 hours (parallel)"
+    }
+  },
+  
+  "estimated_total_runtime": "19-30 hours (with parallelization)",
+  "estimated_sequential_runtime": "32-43 hours (sequential)",
+  "output_directory": "outputs/biomet_la_wildfire_20260107"
+}
+

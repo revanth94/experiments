@@ -1,0 +1,993 @@
+{
+  "config_id": "exec_topycs_hyderabad_datacenter_20260107",
+  "analysis_id": "topycs_hyderabad_datacenter_20260107",
+  "timestamp": "2026-01-07 16:40:00",
+  "customer": "Topycs",
+  "location": "Gachibowli area, Hyderabad, India",
+  "execution_mode": "hybrid",
+  "description": "Comprehensive datacentre environmental impact assessment for site feasibility and regulatory compliance",
+  
+  "system_status": "REQUIRES_CATALOG_ENHANCEMENT",
+  "catalog_gaps_note": "This configuration requires new data loaders and models that are not yet implemented in the current catalog. This file serves as a specification for system enhancement.",
+  
+  "step_groups": {
+    "data_loading": {
+      "description": "Load all required baseline environmental data for Gachibowli area",
+      "module": "data_loaders",
+      "parallel": true,
+      "step_ids": [
+        "load_satellite_vegetation_india",
+        "load_elevation_dem_india",
+        "load_imd_climate_data",
+        "load_cpcb_air_quality",
+        "load_india_water_resources",
+        "load_gachibowli_land_use",
+        "load_telangana_biodiversity",
+        "load_telangana_energy_grid",
+        "load_ambient_noise_baseline"
+      ],
+      "implementation_status": "NEEDS_NEW_FUNCTIONS",
+      "required_new_functions": [
+        "load_imd_climate_data",
+        "load_cpcb_air_quality",
+        "load_india_water_resources",
+        "load_gachibowli_land_use",
+        "load_telangana_biodiversity",
+        "load_telangana_energy_grid",
+        "load_ambient_noise_baseline"
+      ]
+    },
+    "preprocessing": {
+      "description": "Preprocess and align datasets for Indian geographic context",
+      "module": "data_processors",
+      "parallel": true,
+      "step_ids": [
+        "preprocess_spatial_india",
+        "preprocess_climate_imd"
+      ],
+      "implementation_status": "USES_EXISTING_FUNCTIONS"
+    },
+    "site_characterization": {
+      "description": "Establish baseline environmental conditions",
+      "module": "models",
+      "parallel": true,
+      "step_ids": [
+        "run_baseline_characterization"
+      ],
+      "implementation_status": "NEEDS_NEW_MODEL"
+    },
+    "impact_models_energy_water": {
+      "description": "Energy and water resource impact models",
+      "module": "models",
+      "parallel": false,
+      "step_ids": [
+        "run_datacenter_energy_carbon_model",
+        "run_datacenter_water_usage_model"
+      ],
+      "implementation_status": "NEEDS_NEW_MODELS"
+    },
+    "impact_models_heat_air": {
+      "description": "Heat island and air quality impact models",
+      "module": "models",
+      "parallel": true,
+      "step_ids": [
+        "run_urban_heat_island_model",
+        "run_air_quality_datacenter_model"
+      ],
+      "implementation_status": "NEEDS_NEW_MODELS"
+    },
+    "impact_models_noise_habitat": {
+      "description": "Noise and habitat impact models",
+      "module": "models",
+      "parallel": true,
+      "step_ids": [
+        "run_noise_assessment_model",
+        "run_land_use_habitat_model"
+      ],
+      "implementation_status": "NEEDS_NEW_MODELS"
+    },
+    "integrated_assessment": {
+      "description": "Comprehensive EIA aligned with Indian regulations",
+      "module": "models",
+      "parallel": false,
+      "step_ids": [
+        "run_integrated_datacenter_eia"
+      ],
+      "implementation_status": "NEEDS_NEW_MODEL"
+    },
+    "regulatory_compliance": {
+      "description": "Indian regulatory compliance assessment",
+      "module": "models",
+      "parallel": false,
+      "step_ids": [
+        "run_indian_regulatory_compliance"
+      ],
+      "implementation_status": "NEEDS_NEW_MODEL"
+    },
+    "reporting": {
+      "description": "Generate EIA reports and export results",
+      "module": "reporting",
+      "parallel": true,
+      "step_ids": [
+        "generate_eia_executive_summary",
+        "generate_eia_technical_report",
+        "generate_emp_plan",
+        "generate_compliance_matrix",
+        "export_gis_package_datacenter",
+        "create_sustainability_scorecard"
+      ],
+      "implementation_status": "NEEDS_ENHANCEMENT"
+    }
+  },
+  
+  "steps": [
+    {
+      "step_id": "load_satellite_vegetation_india",
+      "step_name": "Load Satellite Vegetation Data (India)",
+      "group": "data_loading",
+      "function": "load_satellite_data",
+      "module": "data_loaders",
+      "implementation_status": "EXISTS",
+      "arguments": {
+        "location": "Gachibowli area, Hyderabad, India",
+        "start_date": "2024-01-01",
+        "end_date": "2026-01-01",
+        "data_types": ["vegetation health", "biomass density", "NDVI"],
+        "output_path": "data/topycs_hyderabad/loaded/satellite_vegetation_2024_2026.nc"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/satellite_vegetation_2024_2026.nc",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "load_elevation_dem_india",
+      "step_name": "Load Digital Elevation Model (Hyderabad)",
+      "group": "data_loading",
+      "function": "load_elevation_data",
+      "module": "data_loaders",
+      "implementation_status": "EXISTS",
+      "arguments": {
+        "location": "Gachibowli area, Hyderabad, India",
+        "resolution": "30m",
+        "output_path": "data/topycs_hyderabad/loaded/elevation_dem_hyderabad.tif"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/elevation_dem_hyderabad.tif",
+      "estimated_runtime": "30-60 minutes"
+    },
+    {
+      "step_id": "load_imd_climate_data",
+      "step_name": "Load IMD Climate Data (Hyderabad)",
+      "group": "data_loading",
+      "function": "load_imd_climate_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load India Meteorological Department climate data",
+        "parameters": {
+          "location": "Geographic location in India",
+          "start_date": "Start date YYYY-MM-DD",
+          "end_date": "End date YYYY-MM-DD",
+          "data_types": ["temperature", "humidity", "wind_speed", "wind_direction", "precipitation", "solar_radiation"],
+          "source": "IMD API or NCEI India datasets",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "location": "Gachibowli area, Hyderabad, India",
+        "start_date": "2014-01-01",
+        "end_date": "2026-01-01",
+        "data_types": ["temperature", "humidity", "wind_speed", "wind_direction", "precipitation", "solar_radiation"],
+        "output_path": "data/topycs_hyderabad/loaded/imd_climate_2014_2026.nc"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/imd_climate_2014_2026.nc",
+      "estimated_runtime": "2-3 hours"
+    },
+    {
+      "step_id": "load_cpcb_air_quality",
+      "step_name": "Load CPCB Air Quality Data (Hyderabad)",
+      "group": "data_loading",
+      "function": "load_cpcb_air_quality_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load Central Pollution Control Board air quality monitoring data",
+        "parameters": {
+          "location": "City or monitoring station location",
+          "start_date": "Start date YYYY-MM-DD",
+          "end_date": "End date YYYY-MM-DD",
+          "pollutants": ["PM2.5", "PM10", "NO2", "SO2", "CO", "O3"],
+          "source": "CPCB real-time monitoring network, State PCB",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "location": "Hyderabad, Telangana",
+        "start_date": "2021-01-01",
+        "end_date": "2026-01-01",
+        "pollutants": ["PM2.5", "PM10", "NO2", "SO2", "CO", "O3"],
+        "output_path": "data/topycs_hyderabad/loaded/cpcb_air_quality_2021_2026.csv"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/cpcb_air_quality_2021_2026.csv",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "load_india_water_resources",
+      "step_name": "Load Water Resources Data (Hyderabad)",
+      "group": "data_loading",
+      "function": "load_india_water_resources_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load groundwater levels, surface water availability, and water quality data",
+        "parameters": {
+          "location": "Geographic location",
+          "start_date": "Start date YYYY-MM-DD",
+          "end_date": "End date YYYY-MM-DD",
+          "data_types": ["groundwater_levels", "surface_water", "water_quality_parameters", "seasonal_availability"],
+          "source": "Central Ground Water Board (CGWB), State Water Resources Department",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "location": "Hyderabad, Telangana",
+        "start_date": "2014-01-01",
+        "end_date": "2026-01-01",
+        "data_types": ["groundwater_levels", "surface_water", "water_quality_parameters", "seasonal_availability"],
+        "output_path": "data/topycs_hyderabad/loaded/water_resources_2014_2026.csv"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/water_resources_2014_2026.csv",
+      "estimated_runtime": "2-3 hours"
+    },
+    {
+      "step_id": "load_gachibowli_land_use",
+      "step_name": "Load Gachibowli Land Use and Urban Planning Data",
+      "group": "data_loading",
+      "function": "load_india_land_use_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load land use classification, zoning, and urban planning data",
+        "parameters": {
+          "location": "Geographic location",
+          "data_types": ["land_use_classification", "zoning", "protected_areas", "urban_density", "sensitive_receptors"],
+          "source": "Hyderabad Metropolitan Development Authority (HMDA), Survey of India",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "location": "Gachibowli area, Hyderabad",
+        "data_types": ["land_use_classification", "zoning", "protected_areas", "urban_density", "sensitive_receptors"],
+        "output_path": "data/topycs_hyderabad/loaded/land_use_gachibowli.shp"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/land_use_gachibowli.shp",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "load_telangana_biodiversity",
+      "step_name": "Load Telangana Biodiversity and Habitat Data",
+      "group": "data_loading",
+      "function": "load_india_biodiversity_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load biodiversity, species presence, and habitat data",
+        "parameters": {
+          "location": "Geographic location",
+          "data_types": ["species_presence", "habitat_classification", "protected_species", "ecological_sensitivity"],
+          "source": "Telangana State Biodiversity Board, Wildlife Institute of India",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "location": "Hyderabad, Telangana",
+        "data_types": ["species_presence", "habitat_classification", "protected_species", "ecological_sensitivity"],
+        "output_path": "data/topycs_hyderabad/loaded/biodiversity_telangana.shp"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/biodiversity_telangana.shp",
+      "estimated_runtime": "1-2 hours"
+    },
+    {
+      "step_id": "load_telangana_energy_grid",
+      "step_name": "Load Telangana Energy Grid Mix Data",
+      "group": "data_loading",
+      "function": "load_india_energy_grid_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load power grid energy mix and carbon intensity factors",
+        "parameters": {
+          "state": "Indian state name",
+          "data_types": ["energy_mix", "carbon_intensity_factors", "grid_reliability"],
+          "source": "State Electricity Board, Central Electricity Authority",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "state": "Telangana",
+        "data_types": ["energy_mix", "carbon_intensity_factors", "grid_reliability"],
+        "output_path": "data/topycs_hyderabad/loaded/energy_grid_telangana.json"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/energy_grid_telangana.json",
+      "estimated_runtime": "30-60 minutes"
+    },
+    {
+      "step_id": "load_ambient_noise_baseline",
+      "step_name": "Load Ambient Noise Baseline Data (Gachibowli)",
+      "group": "data_loading",
+      "function": "load_india_noise_data",
+      "module": "data_loaders",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Load ambient noise levels and sensitive receptor locations",
+        "parameters": {
+          "location": "Geographic location",
+          "data_types": ["ambient_noise_levels", "noise_zoning", "sensitive_receptors"],
+          "source": "State PCB noise monitoring, urban noise surveys",
+          "output_path": "Path to save data"
+        }
+      },
+      "arguments": {
+        "location": "Gachibowli area, Hyderabad",
+        "data_types": ["ambient_noise_levels", "noise_zoning", "sensitive_receptors"],
+        "output_path": "data/topycs_hyderabad/loaded/noise_baseline_gachibowli.csv"
+      },
+      "depends_on": [],
+      "output": "data/topycs_hyderabad/loaded/noise_baseline_gachibowli.csv",
+      "estimated_runtime": "1 hour"
+    },
+    {
+      "step_id": "preprocess_spatial_india",
+      "step_name": "Preprocess and Align Spatial Data (Indian CRS)",
+      "group": "preprocessing",
+      "function": "preprocess_spatial_data",
+      "module": "data_processors",
+      "implementation_status": "EXISTS",
+      "arguments": {
+        "input_files": [
+          "$load_satellite_vegetation_india",
+          "$load_elevation_dem_india",
+          "$load_gachibowli_land_use",
+          "$load_telangana_biodiversity"
+        ],
+        "target_crs": "EPSG:32643",
+        "target_resolution": "30m",
+        "output_path": "data/topycs_hyderabad/preprocessed/spatial_aligned_india.nc"
+      },
+      "depends_on": ["load_satellite_vegetation_india", "load_elevation_dem_india", "load_gachibowli_land_use", "load_telangana_biodiversity"],
+      "output": "data/topycs_hyderabad/preprocessed/spatial_aligned_india.nc",
+      "estimated_runtime": "1-2 hours",
+      "notes": "Using UTM Zone 43N (EPSG:32643) for Hyderabad area"
+    },
+    {
+      "step_id": "preprocess_climate_imd",
+      "step_name": "Preprocess IMD Climate Data",
+      "group": "preprocessing",
+      "function": "preprocess_temporal_data",
+      "module": "data_processors",
+      "implementation_status": "EXISTS",
+      "arguments": {
+        "input_file": "$load_imd_climate_data",
+        "temporal_resolution": "hourly",
+        "aggregation_method": "mean",
+        "fill_gaps": true,
+        "output_path": "data/topycs_hyderabad/preprocessed/climate_hourly_imd.nc"
+      },
+      "depends_on": ["load_imd_climate_data"],
+      "output": "data/topycs_hyderabad/preprocessed/climate_hourly_imd.nc",
+      "estimated_runtime": "30-60 minutes"
+    },
+    {
+      "step_id": "run_baseline_characterization",
+      "step_name": "Execute Baseline Environmental Characterization",
+      "group": "site_characterization",
+      "function": "run_baseline_characterization_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Establish comprehensive baseline environmental conditions for site",
+        "parameters": {
+          "spatial_data": "Aligned spatial datasets",
+          "climate_data": "Processed climate data",
+          "air_quality_data": "Air quality baseline",
+          "water_data": "Water resources baseline",
+          "noise_data": "Noise baseline",
+          "output_path": "Path to save baseline report"
+        }
+      },
+      "arguments": {
+        "spatial_data": "$preprocess_spatial_india",
+        "climate_data": "$preprocess_climate_imd",
+        "air_quality_data": "$load_cpcb_air_quality",
+        "water_data": "$load_india_water_resources",
+        "noise_data": "$load_ambient_noise_baseline",
+        "output_path": "results/topycs_hyderabad/baseline_characterization.nc"
+      },
+      "depends_on": ["preprocess_spatial_india", "preprocess_climate_imd", "load_cpcb_air_quality", "load_india_water_resources", "load_ambient_noise_baseline"],
+      "output": "results/topycs_hyderabad/baseline_characterization.nc",
+      "estimated_runtime": "2-3 hours"
+    },
+    {
+      "step_id": "run_datacenter_energy_carbon_model",
+      "step_name": "Execute Datacentre Energy and Carbon Footprint Model",
+      "group": "impact_models_energy_water",
+      "function": "run_datacenter_energy_carbon_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Calculate energy consumption and carbon emissions based on IT capacity and grid carbon intensity",
+        "parameters": {
+          "datacenter_capacity_mw": "Planned IT capacity in MW",
+          "pue_estimate": "Power Usage Effectiveness estimate",
+          "grid_data": "Energy grid mix and carbon intensity",
+          "climate_data": "Climate data for cooling load estimation",
+          "renewable_energy_percent": "Percentage renewable energy target",
+          "output_path": "Path to save results"
+        },
+        "outputs": ["annual_energy_consumption_mwh", "annual_co2_emissions_tonnes", "scope_1_2_3_breakdown", "renewable_offset_potential"]
+      },
+      "arguments": {
+        "datacenter_capacity_mw": 10,
+        "pue_estimate": 1.4,
+        "grid_data": "$load_telangana_energy_grid",
+        "climate_data": "$preprocess_climate_imd",
+        "renewable_energy_percent": 30,
+        "output_path": "results/topycs_hyderabad/energy_carbon_footprint.json"
+      },
+      "depends_on": ["load_telangana_energy_grid", "preprocess_climate_imd"],
+      "output": "results/topycs_hyderabad/energy_carbon_footprint.json",
+      "estimated_runtime": "2-3 hours",
+      "datacenter_specifications": {
+        "note": "Assumes 10 MW IT capacity as placeholder - should be updated with actual design specs",
+        "pue_target": 1.4,
+        "renewable_energy_target": "30%"
+      }
+    },
+    {
+      "step_id": "run_datacenter_water_usage_model",
+      "step_name": "Execute Datacentre Water Consumption Model",
+      "group": "impact_models_energy_water",
+      "function": "run_datacenter_water_usage_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Calculate water requirements for cooling systems and thermal pollution potential",
+        "parameters": {
+          "datacenter_capacity_mw": "IT capacity in MW",
+          "cooling_system_type": "water_cooled or air_cooled",
+          "climate_data": "Climate data for cooling requirements",
+          "water_availability_data": "Local water availability",
+          "discharge_standards": "Wastewater discharge standards",
+          "output_path": "Path to save results"
+        },
+        "outputs": ["annual_water_consumption_million_liters", "peak_water_demand", "wastewater_thermal_load", "water_stress_impact", "alternative_cooling_comparison"]
+      },
+      "arguments": {
+        "datacenter_capacity_mw": 10,
+        "cooling_system_type": "hybrid_water_air",
+        "climate_data": "$preprocess_climate_imd",
+        "water_availability_data": "$load_india_water_resources",
+        "discharge_standards": "Indian_CPCB_standards",
+        "output_path": "results/topycs_hyderabad/water_usage_impact.json"
+      },
+      "depends_on": ["run_datacenter_energy_carbon_model", "preprocess_climate_imd", "load_india_water_resources"],
+      "output": "results/topycs_hyderabad/water_usage_impact.json",
+      "estimated_runtime": "2-3 hours"
+    },
+    {
+      "step_id": "run_urban_heat_island_model",
+      "step_name": "Execute Urban Heat Island Impact Model",
+      "group": "impact_models_heat_air",
+      "function": "run_urban_heat_island_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Model heat rejection impacts on local ambient temperatures",
+        "parameters": {
+          "heat_rejection_rate_mw": "Heat rejection from cooling systems",
+          "building_footprint": "Datacentre footprint and height",
+          "wind_data": "Local wind patterns",
+          "urban_density_data": "Urban density around site",
+          "baseline_temperature": "Baseline temperature data",
+          "output_path": "Path to save results"
+        },
+        "outputs": ["temperature_increase_predictions", "heat_island_intensity_maps", "seasonal_variation", "mitigation_strategies"]
+      },
+      "arguments": {
+        "heat_rejection_rate_mw": 14,
+        "building_footprint": {
+          "area_sqm": 5000,
+          "height_m": 12,
+          "location": "Gachibowli area, Hyderabad"
+        },
+        "wind_data": "$preprocess_climate_imd",
+        "urban_density_data": "$load_gachibowli_land_use",
+        "baseline_temperature": "$preprocess_climate_imd",
+        "output_path": "results/topycs_hyderabad/heat_island_impact.tif"
+      },
+      "depends_on": ["run_datacenter_energy_carbon_model", "preprocess_climate_imd", "load_gachibowli_land_use"],
+      "output": "results/topycs_hyderabad/heat_island_impact.tif",
+      "estimated_runtime": "3-4 hours"
+    },
+    {
+      "step_id": "run_air_quality_datacenter_model",
+      "step_name": "Execute Datacentre Air Quality Impact Model",
+      "group": "impact_models_heat_air",
+      "function": "run_air_quality_datacenter_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Model air emissions from backup generators and assess compliance with Indian NAAQS",
+        "parameters": {
+          "generator_specifications": "Generator specs, fuel type, capacity",
+          "operation_schedule": "Testing and operation hours",
+          "emission_factors": "Pollutant emission factors",
+          "meteorological_data": "Wind, temperature for dispersion modeling",
+          "baseline_air_quality": "Baseline air quality data",
+          "sensitive_receptors": "Nearby schools, hospitals, residential",
+          "output_path": "Path to save results"
+        },
+        "outputs": ["pollutant_concentration_predictions", "dispersion_maps", "naaqs_compliance_assessment", "health_impact_screening", "emission_control_recommendations"]
+      },
+      "arguments": {
+        "generator_specifications": {
+          "capacity_kva": 2000,
+          "fuel_type": "diesel",
+          "quantity": 4,
+          "emission_standard": "CPCB_2015"
+        },
+        "operation_schedule": "weekly_testing_4hrs_plus_backup",
+        "emission_factors": "CPCB_diesel_generator_factors",
+        "meteorological_data": "$preprocess_climate_imd",
+        "baseline_air_quality": "$load_cpcb_air_quality",
+        "sensitive_receptors": "$load_gachibowli_land_use",
+        "output_path": "results/topycs_hyderabad/air_quality_impact.nc"
+      },
+      "depends_on": ["preprocess_climate_imd", "load_cpcb_air_quality", "load_gachibowli_land_use"],
+      "output": "results/topycs_hyderabad/air_quality_impact.nc",
+      "estimated_runtime": "4-5 hours"
+    },
+    {
+      "step_id": "run_noise_assessment_model",
+      "step_name": "Execute Datacentre Noise Impact Assessment",
+      "group": "impact_models_noise_habitat",
+      "function": "run_noise_assessment_datacenter_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Assess noise from cooling towers, chillers, generators and compliance with Indian standards",
+        "parameters": {
+          "equipment_specifications": "Sound power levels for all equipment",
+          "building_layout": "Layout and noise barriers",
+          "receptor_distances": "Distance to sensitive receptors",
+          "ambient_noise_baseline": "Ambient noise baseline",
+          "indian_noise_standards": "Applicable noise zone standards",
+          "output_path": "Path to save results"
+        },
+        "outputs": ["noise_contour_maps", "compliance_assessment", "day_night_noise_levels", "mitigation_recommendations", "community_impact"]
+      },
+      "arguments": {
+        "equipment_specifications": {
+          "cooling_towers": {"sound_power_db": 85, "quantity": 4},
+          "chillers": {"sound_power_db": 90, "quantity": 2},
+          "generators": {"sound_power_db": 95, "quantity": 4},
+          "hvac_systems": {"sound_power_db": 75, "quantity": 10}
+        },
+        "building_layout": "enclosed_equipment_rooms_with_acoustic_treatment",
+        "receptor_distances": "$load_gachibowli_land_use",
+        "ambient_noise_baseline": "$load_ambient_noise_baseline",
+        "indian_noise_standards": "industrial_commercial_zone",
+        "output_path": "results/topycs_hyderabad/noise_impact_assessment.shp"
+      },
+      "depends_on": ["load_gachibowli_land_use", "load_ambient_noise_baseline"],
+      "output": "results/topycs_hyderabad/noise_impact_assessment.shp",
+      "estimated_runtime": "3-4 hours"
+    },
+    {
+      "step_id": "run_land_use_habitat_model",
+      "step_name": "Execute Land Use Change and Habitat Impact Model",
+      "group": "impact_models_noise_habitat",
+      "function": "run_land_use_habitat_impact_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Assess habitat loss, species impacts, and ecological sensitivity",
+        "parameters": {
+          "site_footprint_area": "Datacentre site area",
+          "current_land_cover": "Current vegetation and land use",
+          "biodiversity_data": "Species and habitat data",
+          "protected_areas": "Protected area proximity",
+          "ecological_sensitivity": "Sensitivity zoning",
+          "output_path": "Path to save results"
+        },
+        "outputs": ["habitat_loss_quantification", "species_impact_assessment", "ecological_sensitivity_rating", "biodiversity_offset_requirements", "mitigation_measures"]
+      },
+      "arguments": {
+        "site_footprint_area": 2.5,
+        "current_land_cover": "$load_satellite_vegetation_india",
+        "biodiversity_data": "$load_telangana_biodiversity",
+        "protected_areas": "$load_telangana_biodiversity",
+        "ecological_sensitivity": "$load_telangana_biodiversity",
+        "output_path": "results/topycs_hyderabad/land_use_habitat_impact.json"
+      },
+      "depends_on": ["load_satellite_vegetation_india", "load_telangana_biodiversity"],
+      "output": "results/topycs_hyderabad/land_use_habitat_impact.json",
+      "estimated_runtime": "2-3 hours",
+      "notes": "Assumes 2.5 hectare site as placeholder"
+    },
+    {
+      "step_id": "run_integrated_datacenter_eia",
+      "step_name": "Execute Integrated Datacentre EIA Model",
+      "group": "integrated_assessment",
+      "function": "run_integrated_datacenter_eia_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Comprehensive EIA combining all impact categories aligned with Indian EIA Notification 2006",
+        "parameters": {
+          "baseline_characterization": "Baseline report",
+          "energy_carbon_results": "Energy/carbon impact results",
+          "water_results": "Water impact results",
+          "heat_island_results": "Heat island results",
+          "air_quality_results": "Air quality results",
+          "noise_results": "Noise assessment results",
+          "habitat_results": "Habitat impact results",
+          "mitigation_measures": "Proposed mitigation measures",
+          "output_path": "Path to save EIA"
+        },
+        "outputs": ["comprehensive_eia", "cumulative_impact_assessment", "environmental_management_plan", "monitoring_framework", "sustainability_scorecard"]
+      },
+      "arguments": {
+        "baseline_characterization": "$run_baseline_characterization",
+        "energy_carbon_results": "$run_datacenter_energy_carbon_model",
+        "water_results": "$run_datacenter_water_usage_model",
+        "heat_island_results": "$run_urban_heat_island_model",
+        "air_quality_results": "$run_air_quality_datacenter_model",
+        "noise_results": "$run_noise_assessment_model",
+        "habitat_results": "$run_land_use_habitat_model",
+        "mitigation_measures": "comprehensive_mitigation_plan",
+        "output_path": "results/topycs_hyderabad/integrated_datacenter_eia.nc"
+      },
+      "depends_on": [
+        "run_baseline_characterization",
+        "run_datacenter_energy_carbon_model",
+        "run_datacenter_water_usage_model",
+        "run_urban_heat_island_model",
+        "run_air_quality_datacenter_model",
+        "run_noise_assessment_model",
+        "run_land_use_habitat_model"
+      ],
+      "output": "results/topycs_hyderabad/integrated_datacenter_eia.nc",
+      "estimated_runtime": "6-8 hours"
+    },
+    {
+      "step_id": "run_indian_regulatory_compliance",
+      "step_name": "Execute Indian Regulatory Compliance Assessment",
+      "group": "regulatory_compliance",
+      "function": "run_indian_regulatory_compliance_model",
+      "module": "models",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Map findings to Indian environmental regulations and clearance requirements",
+        "parameters": {
+          "integrated_eia": "Integrated EIA results",
+          "applicable_laws": ["Environment Protection Act 1986", "Air Act 1981", "Water Act 1974", "EIA Notification 2006", "Noise Rules 2000"],
+          "state_regulations": "Telangana State PCB regulations",
+          "output_path": "Path to save compliance matrix"
+        },
+        "outputs": ["regulatory_compliance_matrix", "clearance_requirements", "permit_applications_needed", "compliance_gaps"]
+      },
+      "arguments": {
+        "integrated_eia": "$run_integrated_datacenter_eia",
+        "applicable_laws": [
+          "Environment Protection Act 1986",
+          "Air Prevention and Control of Pollution Act 1981",
+          "Water Prevention and Control of Pollution Act 1974",
+          "EIA Notification 2006 (as amended)",
+          "Noise Pollution Regulation and Control Rules 2000"
+        ],
+        "state_regulations": "Telangana_State_PCB",
+        "project_category": "IT_infrastructure_datacenter",
+        "output_path": "results/topycs_hyderabad/regulatory_compliance_matrix.json"
+      },
+      "depends_on": ["run_integrated_datacenter_eia"],
+      "output": "results/topycs_hyderabad/regulatory_compliance_matrix.json",
+      "estimated_runtime": "3-4 hours"
+    },
+    {
+      "step_id": "generate_eia_executive_summary",
+      "step_name": "Generate EIA Executive Summary",
+      "group": "reporting",
+      "function": "generate_report",
+      "module": "reporting",
+      "implementation_status": "EXISTS_NEEDS_TEMPLATE",
+      "arguments": {
+        "analysis_results": [
+          "$run_baseline_characterization",
+          "$run_integrated_datacenter_eia",
+          "$run_indian_regulatory_compliance"
+        ],
+        "report_type": "executive_summary",
+        "title": "Datacentre Environmental Impact Assessment - Executive Summary",
+        "include_maps": true,
+        "include_charts": true,
+        "output_path": "reports/topycs_hyderabad/eia_executive_summary.pdf"
+      },
+      "depends_on": ["run_integrated_datacenter_eia", "run_indian_regulatory_compliance"],
+      "output": "reports/topycs_hyderabad/eia_executive_summary.pdf",
+      "estimated_runtime": "2 hours"
+    },
+    {
+      "step_id": "generate_eia_technical_report",
+      "step_name": "Generate Comprehensive EIA Technical Report",
+      "group": "reporting",
+      "function": "generate_report",
+      "module": "reporting",
+      "implementation_status": "EXISTS_NEEDS_TEMPLATE",
+      "arguments": {
+        "analysis_results": [
+          "$run_baseline_characterization",
+          "$run_datacenter_energy_carbon_model",
+          "$run_datacenter_water_usage_model",
+          "$run_urban_heat_island_model",
+          "$run_air_quality_datacenter_model",
+          "$run_noise_assessment_model",
+          "$run_land_use_habitat_model",
+          "$run_integrated_datacenter_eia",
+          "$run_indian_regulatory_compliance"
+        ],
+        "report_type": "full_report",
+        "title": "Comprehensive Environmental Impact Assessment - Topycs Datacentre, Gachibowli, Hyderabad",
+        "include_maps": true,
+        "include_charts": true,
+        "output_path": "reports/topycs_hyderabad/eia_technical_report.pdf"
+      },
+      "depends_on": ["run_integrated_datacenter_eia"],
+      "output": "reports/topycs_hyderabad/eia_technical_report.pdf",
+      "estimated_runtime": "4 hours"
+    },
+    {
+      "step_id": "generate_emp_plan",
+      "step_name": "Generate Environmental Management Plan",
+      "group": "reporting",
+      "function": "generate_emp_document",
+      "module": "reporting",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Generate Environmental Management Plan with mitigation measures and monitoring protocols",
+        "parameters": {
+          "eia_results": "Integrated EIA results",
+          "mitigation_measures": "All proposed mitigation measures",
+          "monitoring_plan": "Environmental monitoring protocols",
+          "output_path": "Path to save EMP"
+        }
+      },
+      "arguments": {
+        "eia_results": "$run_integrated_datacenter_eia",
+        "mitigation_measures": "comprehensive",
+        "monitoring_plan": "operational_phase_monitoring",
+        "output_path": "reports/topycs_hyderabad/environmental_management_plan.pdf"
+      },
+      "depends_on": ["run_integrated_datacenter_eia"],
+      "output": "reports/topycs_hyderabad/environmental_management_plan.pdf",
+      "estimated_runtime": "3 hours"
+    },
+    {
+      "step_id": "generate_compliance_matrix",
+      "step_name": "Generate Regulatory Compliance Matrix",
+      "group": "reporting",
+      "function": "generate_compliance_matrix_document",
+      "module": "reporting",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Generate detailed compliance matrix for Indian environmental regulations",
+        "parameters": {
+          "compliance_results": "Regulatory compliance assessment",
+          "format": "table or detailed report",
+          "output_path": "Path to save matrix"
+        }
+      },
+      "arguments": {
+        "compliance_results": "$run_indian_regulatory_compliance",
+        "format": "detailed_report",
+        "output_path": "reports/topycs_hyderabad/regulatory_compliance_matrix.pdf"
+      },
+      "depends_on": ["run_indian_regulatory_compliance"],
+      "output": "reports/topycs_hyderabad/regulatory_compliance_matrix.pdf",
+      "estimated_runtime": "2 hours"
+    },
+    {
+      "step_id": "export_gis_package_datacenter",
+      "step_name": "Export GIS Data Package (All Impact Layers)",
+      "group": "reporting",
+      "function": "export_gis_package",
+      "module": "reporting",
+      "implementation_status": "EXISTS",
+      "arguments": {
+        "data_files": [
+          "$run_baseline_characterization",
+          "$run_urban_heat_island_model",
+          "$run_air_quality_datacenter_model",
+          "$run_noise_assessment_model",
+          "$run_land_use_habitat_model",
+          "$run_integrated_datacenter_eia"
+        ],
+        "output_format": "geopackage",
+        "include_metadata": true,
+        "output_path": "deliverables/topycs_hyderabad/gis_package_datacenter_eia.gpkg"
+      },
+      "depends_on": ["run_integrated_datacenter_eia"],
+      "output": "deliverables/topycs_hyderabad/gis_package_datacenter_eia.gpkg",
+      "estimated_runtime": "1 hour"
+    },
+    {
+      "step_id": "create_sustainability_scorecard",
+      "step_name": "Create Sustainability Scorecard and Green Datacentre Assessment",
+      "group": "reporting",
+      "function": "create_sustainability_scorecard",
+      "module": "reporting",
+      "implementation_status": "NEEDS_IMPLEMENTATION",
+      "function_spec": {
+        "description": "Generate sustainability scorecard with green datacentre metrics",
+        "parameters": {
+          "energy_results": "Energy and carbon results",
+          "water_results": "Water usage results",
+          "renewable_energy_percent": "Renewable energy percentage",
+          "pue_value": "PUE value",
+          "certifications_target": "Target certifications (LEED, IGBC, etc.)",
+          "output_path": "Path to save scorecard"
+        }
+      },
+      "arguments": {
+        "energy_results": "$run_datacenter_energy_carbon_model",
+        "water_results": "$run_datacenter_water_usage_model",
+        "renewable_energy_percent": 30,
+        "pue_value": 1.4,
+        "certifications_target": ["LEED_Gold", "IGBC_Platinum", "Uptime_Tier_III"],
+        "output_path": "reports/topycs_hyderabad/sustainability_scorecard.pdf"
+      },
+      "depends_on": ["run_datacenter_energy_carbon_model", "run_datacenter_water_usage_model"],
+      "output": "reports/topycs_hyderabad/sustainability_scorecard.pdf",
+      "estimated_runtime": "2 hours"
+    }
+  ],
+  
+  "execution_plan": {
+    "phase_1": {
+      "name": "Data Loading - Baseline Environmental Data",
+      "groups": ["data_loading"],
+      "parallel": true,
+      "estimated_runtime": "3-4 hours (parallel)",
+      "notes": "Load all India-specific environmental baseline data"
+    },
+    "phase_2": {
+      "name": "Data Preprocessing",
+      "groups": ["preprocessing"],
+      "parallel": true,
+      "estimated_runtime": "1-2 hours (parallel)",
+      "notes": "Align to Indian coordinate system (UTM 43N)"
+    },
+    "phase_3": {
+      "name": "Site Baseline Characterization",
+      "groups": ["site_characterization"],
+      "parallel": false,
+      "estimated_runtime": "2-3 hours",
+      "notes": "Establish pre-project environmental conditions"
+    },
+    "phase_4": {
+      "name": "Impact Prediction - Energy and Water",
+      "groups": ["impact_models_energy_water"],
+      "parallel": false,
+      "estimated_runtime": "4-6 hours (sequential - water model depends on energy model)",
+      "notes": "Core resource consumption impacts"
+    },
+    "phase_5": {
+      "name": "Impact Prediction - Heat and Air Quality",
+      "groups": ["impact_models_heat_air"],
+      "parallel": true,
+      "estimated_runtime": "4-5 hours (parallel)",
+      "notes": "Thermal and air quality impacts"
+    },
+    "phase_6": {
+      "name": "Impact Prediction - Noise and Habitat",
+      "groups": ["impact_models_noise_habitat"],
+      "parallel": true,
+      "estimated_runtime": "3-4 hours (parallel)",
+      "notes": "Noise and ecological impacts"
+    },
+    "phase_7": {
+      "name": "Integrated EIA and Synthesis",
+      "groups": ["integrated_assessment"],
+      "parallel": false,
+      "estimated_runtime": "6-8 hours (sequential)",
+      "notes": "Comprehensive EIA combining all impacts"
+    },
+    "phase_8": {
+      "name": "Regulatory Compliance Assessment",
+      "groups": ["regulatory_compliance"],
+      "parallel": false,
+      "estimated_runtime": "3-4 hours (sequential)",
+      "notes": "Map to Indian environmental regulations"
+    },
+    "phase_9": {
+      "name": "Reporting and Deliverables",
+      "groups": ["reporting"],
+      "parallel": true,
+      "estimated_runtime": "4-5 hours (parallel)",
+      "notes": "Generate all reports, EMP, compliance matrix, GIS package"
+    }
+  },
+  
+  "estimated_total_runtime": "30-41 hours (with parallelization)",
+  "estimated_sequential_runtime": "45-60 hours (sequential)",
+  "output_directory": "outputs/topycs_hyderabad_datacenter_20260107",
+  
+  "implementation_roadmap": {
+    "priority_1_critical_functions": [
+      "load_imd_climate_data",
+      "load_cpcb_air_quality_data",
+      "load_india_water_resources_data",
+      "run_datacenter_energy_carbon_model",
+      "run_datacenter_water_usage_model",
+      "run_integrated_datacenter_eia_model"
+    ],
+    "priority_2_high_functions": [
+      "load_india_land_use_data",
+      "load_telangana_energy_grid_data",
+      "run_urban_heat_island_model",
+      "run_air_quality_datacenter_model",
+      "run_noise_assessment_datacenter_model",
+      "run_indian_regulatory_compliance_model"
+    ],
+    "priority_3_medium_functions": [
+      "load_india_biodiversity_data",
+      "load_india_noise_data",
+      "run_baseline_characterization_model",
+      "run_land_use_habitat_impact_model",
+      "generate_emp_document",
+      "generate_compliance_matrix_document",
+      "create_sustainability_scorecard"
+    ],
+    "estimated_development_timeline": "8-12 weeks for full implementation",
+    "notes": "Can implement in phases - Priority 1 functions enable basic datacentre EIA capability"
+  },
+  
+  "validation_notes": {
+    "status": "CONFIG_CREATED_WITH_GAPS",
+    "validation_possible": false,
+    "reason": "Most required functions do not yet exist in current catalog",
+    "next_steps": [
+      "Review this config as specification for system enhancement",
+      "Prioritize function development based on implementation_roadmap",
+      "Develop India-specific data source integrations",
+      "Implement datacentre-specific impact models",
+      "Create reporting templates for Indian EIA requirements",
+      "Once functions are implemented, re-validate this config with config_validator.py"
+    ]
+  },
+  
+  "deliverables": [
+    "Comprehensive Environmental Impact Assessment Report",
+    "Baseline Environmental Characterization Report",
+    "Energy Consumption and Carbon Footprint Analysis",
+    "Water Resource Impact Assessment",
+    "Urban Heat Island Impact Analysis",
+    "Air Quality Impact Assessment with Dispersion Modeling",
+    "Noise Impact Assessment with Contour Maps",
+    "Biodiversity and Habitat Impact Assessment",
+    "Environmental Management Plan (EMP)",
+    "Environmental Monitoring Plan",
+    "Regulatory Compliance Matrix (Indian EIA Requirements)",
+    "GIS Maps Package (All Impact Categories)",
+    "Site Suitability Assessment",
+    "Sustainability Scorecard and Green Datacentre Recommendations",
+    "Permit Application Support Documentation"
+  ]
+}
+

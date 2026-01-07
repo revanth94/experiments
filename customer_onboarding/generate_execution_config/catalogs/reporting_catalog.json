@@ -1,0 +1,152 @@
+{
+  "module": "reporting",
+  "description": "Functions for generating reports and exporting results",
+  "functions": [
+    {
+      "name": "generate_report",
+      "description": "Generate analysis report with maps and visualizations",
+      "parameters": {
+        "analysis_results": {
+          "type": "list",
+          "required": true,
+          "description": "List of paths to analysis result files"
+        },
+        "report_type": {
+          "type": "string",
+          "required": true,
+          "description": "Type of report to generate",
+          "valid_values": ["executive_summary", "technical_report", "full_report"]
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Report title"
+        },
+        "include_maps": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to include maps",
+          "default": true
+        },
+        "include_charts": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to include charts",
+          "default": true
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save report"
+        }
+      },
+      "returns": "Path to generated report"
+    },
+    {
+      "name": "export_gis_package",
+      "description": "Export GIS data package with all spatial layers",
+      "parameters": {
+        "data_files": {
+          "type": "list",
+          "required": true,
+          "description": "List of spatial data files to export"
+        },
+        "output_format": {
+          "type": "string",
+          "required": true,
+          "description": "Output format",
+          "valid_values": ["shapefile", "geojson", "geopackage", "geotiff"]
+        },
+        "include_metadata": {
+          "type": "boolean",
+          "required": false,
+          "description": "Whether to include metadata files",
+          "default": true
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save GIS package"
+        }
+      },
+      "returns": "Path to GIS package"
+    },
+    {
+      "name": "create_web_map",
+      "description": "Create interactive web map from analysis results",
+      "parameters": {
+        "data_files": {
+          "type": "list",
+          "required": true,
+          "description": "List of spatial data files to visualize"
+        },
+        "base_map": {
+          "type": "string",
+          "required": false,
+          "description": "Base map style",
+          "valid_values": ["streets", "satellite", "terrain", "dark"],
+          "default": "streets"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save web map HTML"
+        }
+      },
+      "returns": "Path to web map file"
+    },
+    {
+      "name": "generate_summary_statistics",
+      "description": "Generate summary statistics from analysis results",
+      "parameters": {
+        "data_files": {
+          "type": "list",
+          "required": true,
+          "description": "List of data files to summarize"
+        },
+        "statistics": {
+          "type": "list",
+          "required": false,
+          "description": "Statistics to calculate",
+          "valid_values": ["mean", "median", "std", "min", "max", "percentiles"],
+          "default": ["mean", "median", "std", "min", "max"]
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save statistics CSV"
+        }
+      },
+      "returns": "Path to statistics file"
+    },
+    {
+      "name": "create_visualization",
+      "description": "Create static visualizations (maps, charts, plots)",
+      "parameters": {
+        "data_file": {
+          "type": "string",
+          "required": true,
+          "description": "Path to data file to visualize"
+        },
+        "visualization_type": {
+          "type": "string",
+          "required": true,
+          "description": "Type of visualization",
+          "valid_values": ["map", "time_series", "histogram", "scatter", "heatmap"]
+        },
+        "title": {
+          "type": "string",
+          "required": false,
+          "description": "Visualization title"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save visualization"
+        }
+      },
+      "returns": "Path to visualization file"
+    }
+  ]
+}
+

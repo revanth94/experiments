@@ -1,0 +1,261 @@
+{
+  "module": "data_loaders",
+  "description": "Functions for loading data from external sources",
+  "functions": [
+    {
+      "name": "load_satellite_data",
+      "description": "Load satellite vegetation index data (NDVI, biomass)",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location or bounding box"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "data_types": {
+          "type": "list",
+          "required": true,
+          "description": "List of data types to load",
+          "valid_values": ["vegetation health", "fuel load", "biomass density", "NDVI"]
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_climate_data",
+      "description": "Load weather station climate data",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "data_types": {
+          "type": "list",
+          "required": true,
+          "description": "Climate variables to load",
+          "valid_values": ["temperature", "humidity", "wind patterns", "precipitation"]
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_drought_data",
+      "description": "Load US Drought Monitor data",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_air_quality_data",
+      "description": "Load EPA air quality data",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_wildfire_perimeters",
+      "description": "Load historical wildfire perimeter data",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_wildlife_habitat_data",
+      "description": "Load wildlife habitat database",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_soil_erosion_data",
+      "description": "Load soil erosion risk maps",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_water_quality_data",
+      "description": "Load USGS water quality data",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "start_date": {
+          "type": "string",
+          "required": true,
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "required": true,
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_elevation_data",
+      "description": "Load digital elevation models",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "resolution": {
+          "type": "string",
+          "required": false,
+          "description": "Spatial resolution (e.g., '30m', '10m')",
+          "default": "30m"
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    },
+    {
+      "name": "load_land_cover_data",
+      "description": "Load national land cover database",
+      "parameters": {
+        "location": {
+          "type": "string",
+          "required": true,
+          "description": "Geographic location"
+        },
+        "year": {
+          "type": "integer",
+          "required": false,
+          "description": "Year of land cover data",
+          "default": 2021
+        },
+        "output_path": {
+          "type": "string",
+          "required": true,
+          "description": "Path to save loaded data"
+        }
+      },
+      "returns": "Path to loaded data file"
+    }
+  ]
+}
+
