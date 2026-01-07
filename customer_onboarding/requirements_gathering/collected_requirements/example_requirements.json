@@ -1,0 +1,15 @@
+{
+  "customer_name": "Example Corp",
+  "timestamp": "2026-01-07 10:30:00",
+  "location": "Amazon Rainforest, Brazil",
+  "ecological_impacts": [
+    "deforestation",
+    "wildlife habitat loss",
+    "carbon emissions",
+    "water quality"
+  ],
+  "purpose": "Environmental impact assessment for sustainable development project",
+  "additional_info": "Focus on endangered species protection and carbon offset calculations",
+  "status": "pending_analysis"
+}
+

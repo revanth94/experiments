@@ -1,0 +1,13 @@
+{
+  "customer_name": "Revanth Inc.",
+  "timestamp": "2026-01-07 14:30:00",
+  "location": "Essex area, near London, UK",
+  "ecological_impacts": [
+    "noise pollution",
+    "migratory bird impacts"
+  ],
+  "purpose": "Environmental due diligence for wind farm development project",
+  "additional_info": "Analyze historical patterns over the past 5 years to establish comprehensive baseline data for seasonal migration patterns and trends",
+  "status": "pending_analysis"
+}
+
