@@ -1,0 +1,20 @@
+state,population,percent_of_total,rank,region,census_year
+Madhya Pradesh,785,21.3,1,Central,2022
+Karnataka,563,15.3,2,South,2022
+Uttarakhand,560,15.2,3,North,2022
+Maharashtra,444,12.1,4,West,2022
+Tamil Nadu,306,8.3,5,South,2022
+Kerala,190,5.2,6,South,2022
+Assam,200,5.4,7,Northeast,2022
+West Bengal,88,2.4,8,East,2022
+Uttar Pradesh,173,4.7,9,North,2022
+Rajasthan,88,2.4,10,North,2022
+Arunachal Pradesh,29,0.8,11,Northeast,2022
+Odisha,28,0.8,12,East,2022
+Telangana,26,0.7,13,South,2022
+Chhattisgarh,19,0.5,14,Central,2022
+Bihar,54,1.5,15,East,2022
+Jharkhand,8,0.2,16,East,2022
+Mizoram,8,0.2,17,Northeast,2022
+Andhra Pradesh,7,0.2,18,South,2022
+

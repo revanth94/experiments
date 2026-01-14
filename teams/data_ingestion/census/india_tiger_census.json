@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "country": "India",
+    "data_source": "National Tiger Conservation Authority (NTCA)",
+    "survey_frequency": "Every 4 years",
+    "methodology": "Camera trap surveys with statistical estimation models",
+    "last_updated": "2022",
+    "next_census_expected": "2026",
+    "website": "https://ntca.gov.in"
+  },
+  "national_census": [
+    {
+      "year": 2006,
+      "population": 1411,
+      "change_from_previous": null,
+      "percent_change": null,
+      "report_title": "Status of Tigers in India 2006"
+    },
+    {
+      "year": 2010,
+      "population": 1706,
+      "change_from_previous": 295,
+      "percent_change": 20.9,
+      "report_title": "Status of Tigers in India 2010"
+    },
+    {
+      "year": 2014,
+      "population": 2226,
+      "change_from_previous": 520,
+      "percent_change": 30.5,
+      "report_title": "Status of Tigers, Co-predators and Prey in India 2014"
+    },
+    {
+      "year": 2018,
+      "population": 2967,
+      "change_from_previous": 741,
+      "percent_change": 33.3,
+      "report_title": "Status of Tigers, Co-predators and Prey in India 2018"
+    },
+    {
+      "year": 2022,
+      "population": 3682,
+      "change_from_previous": 715,
+      "percent_change": 24.1,
+      "report_title": "Status of Tigers, Co-predators and Prey in India 2022"
+    }
+  ],
+  "state_breakdown_2022": [
+    {
+      "state": "Madhya Pradesh",
+      "population": 785,
+      "percent_of_total": 21.3,
+      "rank": 1,
+      "region": "Central",
+      "major_reserves": ["Kanha", "Bandhavgarh", "Pench", "Satpura"]
+    },
+    {
+      "state": "Karnataka",
+      "population": 563,
+      "percent_of_total": 15.3,
+      "rank": 2,
+      "region": "South",
+      "major_reserves": ["Nagarhole", "Bandipur", "BRT Hills"]
+    },
+    {
+      "state": "Uttarakhand",
+      "population": 560,
+      "percent_of_total": 15.2,
+      "rank": 3,
+      "region": "North",
+      "major_reserves": ["Corbett", "Rajaji"]
+    },
+    {
+      "state": "Maharashtra",
+      "population": 444,
+      "percent_of_total": 12.1,
+      "rank": 4,
+      "region": "West",
+      "major_reserves": ["Tadoba", "Pench", "Navegaon-Nagzira"]
+    },
+    {
+      "state": "Tamil Nadu",
+      "population": 306,
+      "percent_of_total": 8.3,
+      "rank": 5,
+      "region": "South",
+      "major_reserves": ["Mudumalai", "Anamalai", "Sathyamangalam"]
+    },
+    {
+      "state": "Assam",
+      "population": 200,
+      "percent_of_total": 5.4,
+      "rank": 7,
+      "region": "Northeast",
+      "major_reserves": ["Kaziranga", "Manas", "Nameri"]
+    },
+    {
+      "state": "Kerala",
+      "population": 190,
+      "percent_of_total": 5.2,
+      "rank": 6,
+      "region": "South",
+      "major_reserves": ["Periyar", "Parambikulam", "Wayanad"]
+    },
+    {
+      "state": "Uttar Pradesh",
+      "population": 173,
+      "percent_of_total": 4.7,
+      "rank": 9,
+      "region": "North",
+      "major_reserves": ["Dudhwa", "Pilibhit"]
+    },
+    {
+      "state": "West Bengal",
+      "population": 88,
+      "percent_of_total": 2.4,
+      "rank": 8,
+      "region": "East",
+      "major_reserves": ["Sundarbans", "Buxa"]
+    },
+    {
+      "state": "Rajasthan",
+      "population": 88,
+      "percent_of_total": 2.4,
+      "rank": 10,
+      "region": "North",
+      "major_reserves": ["Ranthambore", "Sariska"]
+    },
+    {
+      "state": "Bihar",
+      "population": 54,
+      "percent_of_total": 1.5,
+      "rank": 15,
+      "region": "East",
+      "major_reserves": ["Valmiki"]
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "population": 29,
+      "percent_of_total": 0.8,
+      "rank": 11,
+      "region": "Northeast",
+      "major_reserves": ["Namdapha", "Pakke"]
+    },
+    {
+      "state": "Odisha",
+      "population": 28,
+      "percent_of_total": 0.8,
+      "rank": 12,
+      "region": "East",
+      "major_reserves": ["Similipal", "Satkosia"]
+    },
+    {
+      "state": "Telangana",
+      "population": 26,
+      "percent_of_total": 0.7,
+      "rank": 13,
+      "region": "South",
+      "major_reserves": ["Kawal", "Amrabad"]
+    },
+    {
+      "state": "Chhattisgarh",
+      "population": 19,
+      "percent_of_total": 0.5,
+      "rank": 14,
+      "region": "Central",
+      "major_reserves": ["Achanakmar", "Udanti-Sitanadi"]
+    },
+    {
+      "state": "Jharkhand",
+      "population": 8,
+      "percent_of_total": 0.2,
+      "rank": 16,
+      "region": "East",
+      "major_reserves": ["Palamau"]
+    },
+    {
+      "state": "Mizoram",
+      "population": 8,
+      "percent_of_total": 0.2,
+      "rank": 17,
+      "region": "Northeast",
+      "major_reserves": ["Dampa"]
+    },
+    {
+      "state": "Andhra Pradesh",
+      "population": 7,
+      "percent_of_total": 0.2,
+      "rank": 18,
+      "region": "South",
+      "major_reserves": ["Nagarjunasagar-Srisailam"]
+    }
+  ],
+  "regional_summary_2022": {
+    "Central": 804,
+    "South": 1092,
+    "North": 821,
+    "Northeast": 237,
+    "East": 178,
+    "West": 444
+  },
+  "conservation_notes": {
+    "total_tiger_reserves": 53,
+    "total_area_protected_km2": 75000,
+    "key_success_factors": [
+      "Project Tiger initiative since 1973",
+      "Anti-poaching measures",
+      "Habitat connectivity corridors",
+      "Community-based conservation",
+      "Scientific monitoring with camera traps"
+    ],
+    "challenges": [
+      "Human-wildlife conflict",
+      "Habitat fragmentation",
+      "Poaching threats",
+      "Climate change impacts"
+    ]
+  }
+}
+
